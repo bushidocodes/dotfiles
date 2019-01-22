@@ -1,4 +1,4 @@
-# Fix weirdo key
+# Fix lack of Delete key binding
 bindkey "^[[3~" delete-char
 
 # Add to my path
