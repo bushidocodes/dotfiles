@@ -5,35 +5,51 @@
 sudo apt update --yes
 sudo apt upgrade --yes
 
+# Add Universe
+sudo add-apt-repository universe
+
+# Install Fira Code for VSCode
+sudo apt install fonts-firacode --yes
+
+# Install VIM
+sudo apt-get install vim --yes
+
 # Get Miniconda and make it the main python interpreter
-wget --no-check-certificate https://repo.continuum.io/miniconda/Miniconda-3-latest-Linux-x86_64.sh -O ~/miniconda.sh
+wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda.sh 
 chmod +x ~/miniconda.sh
 zsh ~/miniconda.sh -b -p ~/miniconda
 rm ~/miniconda.sh
-conda update
-conda create --name myenv
-soure activate myenv
+export PATH=$PATH:$HOME/miniconda/bin
+conda update --prefix /home/sean/miniconda anaconda
+conda create --name myenv --yes
+source activate myenv
 
 # Install Antibody
 curl -sL git.io/antibody | sh -s
 
-# Install VIM
-sudo apt-get install vim
-
-# TODO: Install MPI... maybe just add binaries to repo and add to path?
-
-# NVM, NPM, Node.js
-
-# Global NPM Modules
+# Install N, Node, and the Native Module build tools 
+curl -L https://git.io/n-install | bash
+sudo apt-get install gcc g++ make --yes
 # http-server
+npm i -g http-server
 # netlify-cli
+npm i -g netlify-cli
 
+## Install OpenMPI from Apt
+sudo apt-get install openmpi-bin openmpi-common openssh-client openssh-server libopenmpi3
+libopenmpi3-dbgsym libopenmpi-dev --yes
 
+## Install OpenMPI from Source... This is SLOW!
+# cd ~
 # wget https://download.open-mpi.org/release/open-mpi/v3.1/openmpi-3.1.3.tar.gz
 # tar -xvf openmpi-3.1.3.tar.gz
 # cd openmpi-3.1.3
 # ./configure --prefix="/home/$USER/.openmpi"
 # make
+# rm -r openmpi-3.1.3
+
+
+## TODO Stuff
 
 # Move to zshrc
 # sudo echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope

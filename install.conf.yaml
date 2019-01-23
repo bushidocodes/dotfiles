@@ -7,9 +7,7 @@
     ~/.gitconfig: gitconfig
     ~/.zshrc: zshrc
     ~/.zsh_plugins.txt: zsh_plugins.txt
+    ~/.config/Code/User/settings.json: vscode_settings.json
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
-  - [cp openmpi.tar.gz ~/openmpi.tar.gz]
-  - [tar -xf openmpi.tar.gz]
-  - [mv ~/openmpi ~/.openmpi]
