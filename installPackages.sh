@@ -8,27 +8,39 @@ sudo apt upgrade --yes
 # Add Universe
 sudo add-apt-repository universe
 
-# Install Fira Code for VSCode
-sudo apt install fonts-firacode --yes
+# Install Fira Code for VSCode. Commented out because WSL can reuse Windows host environment fonts
+# sudo apt install fonts-firacode --yes
 
 # Install VIM
 sudo apt-get install vim --yes
 
 # Get Miniconda and make it the main python interpreter
-wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda.sh 
-chmod +x ~/miniconda.sh
-zsh ~/miniconda.sh -b -p ~/miniconda
-rm ~/miniconda.sh
-export PATH=$PATH:$HOME/miniconda/bin
-conda update --prefix /home/sean/miniconda anaconda
-conda create --name myenv --yes
-source activate myenv
+# Warning: Not idempotent
+# wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda.sh 
+# chmod +x ~/miniconda.sh
+# zsh ~/miniconda.sh -b -p ~/miniconda
+# rm ~/miniconda.sh
+# export PATH=$PATH:$HOME/miniconda/bin
+# conda update --prefix /home/sean/miniconda anaconda
+# conda create --name myenv --yes
+# source activate myenv
 
 # Install Antibody
 curl -sL git.io/antibody | sh -s
 
 # Install N, Node, and the Native Module build tools 
+# Note: you need to remove the N_PREFIX value from zshrc prior to installation
+# n-install: ERROR:
+#   Aborting, because an existing definition of $N_PREFIX added by someone else
+#   was found in '/home/sean/.zshrc':
+
+#   export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"
+
+#   Please remove it and try again.
+# n-install: ERROR: ABORTING due to unexpected error.
 curl -L https://git.io/n-install | bash
+# Source in order to have Node and npm in path for global installs
+source ~/.zshrc
 sudo apt-get install gcc g++ make --yes
 # http-server
 npm i -g http-server
@@ -36,8 +48,7 @@ npm i -g http-server
 npm i -g netlify-cli
 
 ## Install OpenMPI from Apt
-sudo apt-get install openmpi-bin openmpi-common openssh-client openssh-server libopenmpi3
-libopenmpi3-dbgsym libopenmpi-dev --yes
+sudo apt-get install openmpi-bin openmpi-common openssh-client openssh-server libopenmpi3 libopenmpi-dev --yes
 
 ## Install OpenMPI from Source... This is SLOW!
 # cd ~
