@@ -111,7 +111,6 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
-. /home/sean/anaconda3/envs/dlaz/etc/profile.d/conda.sh
-conda activate
+
 export PATH=/home/sean/bin:/usr/local/bin:/home/sean/anaconda3/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/c/Program Files/WindowsApps/WhitewaterFoundryLtd.Co.16571368D6CFF_1.1.27.0_x64__kd1vv0z0vy70w:/c/ProgramData/DockerDesktop/version-bin:/c/Program Files/Docker/Docker/resources/bin:/c/Windows/System32:/c/Windows:/c/Windows/System32/wbem:/c/Windows/System32/WindowsPowerShell/v1.0:/c/Program Files/Lenovo/Fingerprint Manager Pro:/c/ProgramData/Lenovo/ReadyApps:/c/Windows/System32/OpenSSH:/c/ProgramData/chocolatey/bin:/c/Program Files/Intel/WiFi/bin:/c/Program Files/Common Files/Intel/WirelessCommon:/c/Users/Sean/AppData/Local/Microsoft/WindowsApps:/home/sean/.openmpi/bin
 export LD_LIBRARY_PATH=:/home/sean/.openmpi/lib/

@@ -6,6 +6,10 @@
     ~/.bash_logout: bash_logout
     ~/.gitconfig: gitconfig
     ~/.zshrc: zshrc
+    ~/.zsh_plugins.txt: zsh_plugins.txt
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
+  - [cp openmpi.tar.gz ~/openmpi.tar.gz]
+  - [tar -xf openmpi.tar.gz]
+  - [mv ~/openmpi ~/.openmpi]
