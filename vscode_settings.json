@@ -3,5 +3,7 @@
     "editor.fontFamily": "'Fira Code', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
     "terminal.integrated.rendererType": "dom",
     "editor.fontLigatures": true,
-    "git.autofetch": true
+    "git.autofetch": true,
+    "editor.formatOnSave": true,
+    "workbench.iconTheme": "vscode-icons"
 }
