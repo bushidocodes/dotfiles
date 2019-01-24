@@ -28,6 +28,9 @@ sudo apt-get install vim --yes
 # Install Antibody
 curl -sL git.io/antibody | sh -s
 
+# Install C / C++ tools
+sudo apt-get install gcc g++ clang-format make libtinfo5 --yes
+
 # Install N, Node, and the Native Module build tools 
 # Note: you need to remove the N_PREFIX value from zshrc prior to installation
 # n-install: ERROR:
@@ -41,7 +44,6 @@ curl -sL git.io/antibody | sh -s
 curl -L https://git.io/n-install | bash
 # Source in order to have Node and npm in path for global installs
 source ~/.zshrc
-sudo apt-get install gcc g++ make --yes
 # http-server
 npm i -g http-server
 # netlify-cli
@@ -49,7 +51,6 @@ npm i -g netlify-cli
 
 ## Install OpenMPI from Apt
 sudo apt-get install openmpi-bin openmpi-common openssh-client openssh-server libopenmpi3 libopenmpi-dev --yes
-
 ## Install OpenMPI from Source... This is SLOW!
 # cd ~
 # wget https://download.open-mpi.org/release/open-mpi/v3.1/openmpi-3.1.3.tar.gz
