@@ -5,11 +5,19 @@
 sudo apt update --yes
 sudo apt upgrade --yes
 
-# Add Universe
+# Add add-apt-repository based on https://itsfoss.com/add-apt-repository-command-not-found/
+sudo apt-get install software-properties-common
+# Add universe repository
 sudo add-apt-repository universe
 
+# If running on WSL, wipe out the local.conf fonts file because WSL reuse of Windows host environment fonts caused issues using Windows apps while running X window apps
+if grep -q Microsoft /proc/version; then
+  echo "Ubuntu on Windows"
+  sudo rm -f /etc/fonts/local.conf
+fi
+
 # Install Fira Code for VSCode. Commented out because WSL can reuse Windows host environment fonts
-# sudo apt install fonts-firacode --yes
+sudo apt install fonts-firacode --yes
 
 # Install VIM
 sudo apt-get install vim --yes
