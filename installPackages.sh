@@ -37,7 +37,7 @@ sudo apt-get install vim --yes
 curl -sL git.io/antibody | sh -s
 
 # Install C / C++ tools
-sudo apt-get install gcc g++ clang-format make libtinfo5 --yes
+sudo apt-get install gcc gdb g++ clang-format make libtinfo5 --yes
 
 # Install N, Node, and the Native Module build tools 
 # Note: you need to remove the N_PREFIX value from zshrc prior to installation
