@@ -5,5 +5,7 @@
     "editor.fontLigatures": true,
     "git.autofetch": true,
     "editor.formatOnSave": true,
-    "workbench.iconTheme": "vscode-icons"
+    "workbench.iconTheme": "vscode-icons",
+    "window.zoomLevel": 1,
+    "editor.wordWrap": "on"
 }

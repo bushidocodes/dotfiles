@@ -1,3 +1,5 @@
+#!/bin/zsh
+
 # The intent here is to add a script for things I want to install between my UNIX environments
 # This isn't idempotent, so I don't want to run this directly yet...
 
@@ -7,8 +9,6 @@ sudo apt upgrade --yes
 
 # Add add-apt-repository based on https://itsfoss.com/add-apt-repository-command-not-found/
 sudo apt-get install software-properties-common
-# Add universe repository
-sudo add-apt-repository universe
 
 # If running on WSL, wipe out the local.conf fonts file because WSL reuse of Windows host environment fonts caused issues using Windows apps while running X window apps
 if grep -q Microsoft /proc/version; then
@@ -56,6 +56,8 @@ source ~/.zshrc
 npm i -g http-server
 # netlify-cli
 npm i -g netlify-cli
+# fkill
+npm i -g fkill-cli
 
 ## Install OpenMPI from Apt
 sudo apt-get install openmpi-bin openmpi-common openssh-client openssh-server libopenmpi3 libopenmpi-dev --yes
@@ -68,6 +70,8 @@ sudo apt-get install openmpi-bin openmpi-common openssh-client openssh-server li
 # make
 # rm -r openmpi-3.1.3
 
+## Auto-remove stuff I don't need
+sudo apt autoremove -y
 
 ## TODO Stuff
 
