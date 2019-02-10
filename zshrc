@@ -15,5 +15,4 @@ export LD_LIBRARY_PATH=:/home/sean/.openmpi/lib/
 # Activate Conda Environment
 # alias jn="~/miniconda/envs/graphs/bin/jupyter-notebook --no-browser"#
 
-# Added by n-install (see http://git.io/n-install-repo).
-export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  
+export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).

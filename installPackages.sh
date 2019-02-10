@@ -22,6 +22,9 @@ sudo apt install fonts-firacode --yes
 # Install VIM
 sudo apt-get install vim --yes
 
+# Install Curl
+sudo apt-get install curl --yes
+
 # Get Miniconda and make it the main python interpreter
 # Warning: Not idempotent
 # wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda.sh 
