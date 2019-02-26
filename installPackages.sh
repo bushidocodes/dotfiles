@@ -42,6 +42,9 @@ curl -sL git.io/antibody | sh -s
 # Install C / C++ tools
 sudo apt-get install gcc gdb g++ clang-format make libtinfo5 --yes
 
+# Add Java tools
+sudo apt-get install maven --yes
+
 # Install N, Node, and the Native Module build tools 
 # Note: you need to remove the N_PREFIX value from zshrc prior to installation
 # n-install: ERROR:
