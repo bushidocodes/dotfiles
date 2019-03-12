@@ -7,5 +7,11 @@
     "editor.formatOnSave": true,
     "workbench.iconTheme": "vscode-icons",
     "window.zoomLevel": 1,
-    "editor.wordWrap": "on"
+    "editor.wordWrap": "on",
+    "java.configuration.checkProjectSettingsExclusions": false,
+    "editor.suggestSelection": "first",
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "[java]": {
+        
+    }
 }
