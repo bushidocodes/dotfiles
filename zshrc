@@ -16,3 +16,6 @@ export LD_LIBRARY_PATH=:/home/sean/.openmpi/lib/
 # alias jn="~/miniconda/envs/graphs/bin/jupyter-notebook --no-browser"#
 
 export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).
+
+# Java Home
+JAVA_HOME=$(readlink -f /usr/bin/javac | sed "s:/bin/javac::")
