@@ -45,6 +45,13 @@ sudo apt-get install gcc gdb g++ clang-format make libtinfo5 --yes
 # Add Java tools
 sudo apt-get install maven --yes
 
+# Google Cloud
+# https://cloud.google.com/sdk/docs/#deb
+export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)"
+echo "deb http://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
+curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+sudo apt-get install google-cloud-sdk --yes
+
 # Install N, Node, and the Native Module build tools 
 # Note: you need to remove the N_PREFIX value from zshrc prior to installation
 # n-install: ERROR:
@@ -67,6 +74,7 @@ npm i -g fkill-cli
 
 ## Install OpenMPI from Apt
 sudo apt-get install openmpi-bin openmpi-common openssh-client openssh-server libopenmpi3 libopenmpi-dev --yes
+
 ## Install OpenMPI from Source... This is SLOW!
 # cd ~
 # wget https://download.open-mpi.org/release/open-mpi/v3.1/openmpi-3.1.3.tar.gz
