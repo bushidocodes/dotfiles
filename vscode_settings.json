@@ -13,5 +13,6 @@
     "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
     "[java]": {
         
-    }
+    },
+    "window.titleBarStyle": "custom"
 }
