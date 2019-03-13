@@ -1,3 +1,9 @@
+# Setup History
+HISTFILE=~/.zhistory
+HISTSIZE=SAVEHIST=10000
+setopt sharehistory
+setopt extendedhistory
+
 # Fix lack of Delete key binding
 bindkey "^[[3~" delete-char
 
