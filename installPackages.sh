@@ -36,6 +36,10 @@ sudo apt-get install curl --yes
 # conda create --name myenv --yes
 # source activate myenv
 
+# Install Android Malware Tools
+pip install -U androguard pyqt5 pyperclip
+sudo apt-get install qtdeclarative5-dev
+
 # Install Antibody
 curl -sL git.io/antibody | sh -s
 
@@ -65,11 +69,8 @@ sudo apt-get install google-cloud-sdk --yes
 curl -L https://git.io/n-install | bash
 # Source in order to have Node and npm in path for global installs
 source ~/.zshrc
-# http-server
 npm i -g http-server
-# netlify-cli
 npm i -g netlify-cli
-# fkill
 npm i -g fkill-cli
 
 ## Install OpenMPI from Apt
