@@ -73,7 +73,7 @@ npm i -g netlify-cli
 npm i -g fkill-cli
 
 ## Install OpenMPI from Apt
-sudo apt-get install openmpi-bin openmpi-common openssh-client openssh-server libopenmpi3 libopenmpi-dev --yes
+sudo apt install libopenmpi-dev
 
 ## Install OpenMPI from Source... This is SLOW!
 # cd ~
