@@ -56,6 +56,13 @@ cd emsdk
 ./emsdk activate sdk-1.38.15-64bit
 
 # Add Java tools
+sudo apt install openjdk-11-jdk
+sudo apt install openjdk-8-jdk
+git clone https://github.com/gcuisinier/jenv.git ~/.jenv
+source ~/.zshrc
+jenv add /usr/lib/jvm/java-8-openjdk-amd64
+jenv add /usr/lib/jvm/java-11-openjdk-amd64
+jenv global 11.0
 sudo apt-get install maven --yes
 
 # Google Cloud

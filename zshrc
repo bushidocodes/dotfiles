@@ -23,5 +23,9 @@ export LD_LIBRARY_PATH=:/home/sean/.openmpi/lib/
 
 export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).
 
-# Java Home
-JAVA_HOME=$(readlink -f /usr/bin/javac | sed "s:/bin/javac::")
+# Java managed by jenv
+export PATH="$HOME/.jenv/bin:$PATH"
+eval "$(jenv init -)"
+
+# Emscripten
+source ~/Tooling/emsdk/emsdk_env.sh > /dev/null
