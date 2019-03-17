@@ -46,6 +46,15 @@ curl -sL git.io/antibody | sh -s
 # Install C / C++ tools
 sudo apt-get install gcc gdb g++ clang-format make libtinfo5 --yes
 
+# Install Emscripten Stuff (not idempotent
+cd ~
+mkdir Tooling
+cd Tooling
+git clone https://github.com/juj/emsdk.git
+cd emsdk
+./emsdk install sdk-1.38.15-64bit
+./emsdk activate sdk-1.38.15-64bit
+
 # Add Java tools
 sudo apt-get install maven --yes
 
@@ -72,6 +81,7 @@ source ~/.zshrc
 npm i -g http-server
 npm i -g netlify-cli
 npm i -g fkill-cli
+npm i -g rimraf
 
 ## Install OpenMPI from Apt
 sudo apt-get install openmpi-bin openmpi-common openssh-client openssh-server libopenmpi3 libopenmpi-dev --yes
