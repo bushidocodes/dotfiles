@@ -4,6 +4,9 @@ HISTSIZE=SAVEHIST=10000
 setopt sharehistory
 setopt extendedhistory
 
+# Set display env var to allow X forwarding
+export DISPLAY=127.0.0.1:0.0
+
 # Fix lack of Delete key binding
 bindkey "^[[3~" delete-char
 
