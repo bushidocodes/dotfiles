@@ -32,3 +32,8 @@ eval "$(jenv init -)"
 
 # Emscripten
 source ~/Tooling/emsdk/emsdk_env.sh > /dev/null
+
+# WSL alias
+if grep -q Microsoft /proc/version; then
+  alias open=Explorer.exe
+fi
