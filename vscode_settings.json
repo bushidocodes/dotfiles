@@ -1,18 +1,18 @@
 {
-    "files.autoSave": "afterDelay",
     "editor.fontFamily": "'Fira Code', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
-    "terminal.integrated.rendererType": "dom",
     "editor.fontLigatures": true,
-    "git.autofetch": true,
     "editor.formatOnSave": true,
-    "workbench.iconTheme": "vscode-icons",
-    "window.zoomLevel": 1,
-    "editor.wordWrap": "on",
-    "java.configuration.checkProjectSettingsExclusions": false,
     "editor.suggestSelection": "first",
+    "editor.wordWrap": "on",
+    "files.autoSave": "afterDelay",
+    "git.autofetch": true,
+    "python.dataScience.sendSelectionToInteractiveWindow": false,
+    "python.jediEnabled": false,
+    "[java]": {},
+    "java.configuration.checkProjectSettingsExclusions": false,
+    "terminal.integrated.rendererType": "dom",
     "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
-    "[java]": {
-        
-    },
-    "window.titleBarStyle": "custom"
+    "window.titleBarStyle": "custom",
+    "window.zoomLevel": 1,
+    "workbench.iconTheme": "vscode-icons"
 }
