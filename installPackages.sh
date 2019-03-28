@@ -36,6 +36,12 @@ sudo apt-get install curl --yes
 # conda create --name myenv --yes
 # source activate myenv
 
+# Install Fix for VSCode Python language server needed libssl 1.0.0
+sudo apt-get install multiarch-support --yes
+cd ~
+wget http://security.debian.org/debian-security/pool/updates/main/o/openssl/libssl1.0.0_1.0.1t-1+deb8u11_amd64.deb
+sudo dpkg -i libssl1.0.0_1.0.1t-1+deb8u11_amd64.deb
+
 # Install Android Malware Tools
 pip install -U androguard pyqt5 pyperclip
 sudo apt-get install qtdeclarative5-dev
