@@ -5,11 +5,16 @@
     "editor.suggestSelection": "first",
     "editor.wordWrap": "on",
     "files.autoSave": "afterDelay",
+    "files.exclude": {
+        "**/.classpath": true,
+        "**/.project": true,
+        "**/.settings": true,
+        "**/.factorypath": true
+    },
     "git.autofetch": true,
+    "java.home": "/home/sean/.jenv/versions/11.0",
     "python.dataScience.sendSelectionToInteractiveWindow": false,
     "python.jediEnabled": false,
-    "[java]": {},
-    "java.configuration.checkProjectSettingsExclusions": false,
     "terminal.integrated.rendererType": "dom",
     "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
     "window.titleBarStyle": "custom",
