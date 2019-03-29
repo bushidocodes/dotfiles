@@ -33,7 +33,9 @@ eval "$(jenv init -)"
 # Emscripten
 source ~/Tooling/emsdk/emsdk_env.sh > /dev/null
 
-# WSL alias
+# WSL aliases and environment vars
 if grep -q Microsoft /proc/version; then
   alias open=Explorer.exe
+  # This allows WSL apps to open the default Windows browser via Explorer
+  export BROWSER="/c/Program\Windows/explorer.exe"
 fi
