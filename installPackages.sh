@@ -1,14 +1,11 @@
-#!/bin/zsh
-
-# The intent here is to add a script for things I want to install between my UNIX environments
-# This isn't idempotent, so I don't want to run this directly yet...
+#!/bin/sh
 
 # Setup Ubuntu
 sudo apt update --yes
 sudo apt upgrade --yes
 
 # Add add-apt-repository based on https://itsfoss.com/add-apt-repository-command-not-found/
-sudo apt-get install software-properties-common
+sudo apt-get install software-properties-common --yes
 
 # If running on WSL, wipe out the local.conf fonts file because WSL reuse of Windows host environment fonts caused issues using Windows apps while running X window apps
 if grep -q Microsoft /proc/version; then
@@ -16,8 +13,8 @@ if grep -q Microsoft /proc/version; then
   sudo rm -f /etc/fonts/local.conf
 fi
 
-# Install Fira Code for VSCode. Commented out because WSL can reuse Windows host environment fonts
-sudo apt install fonts-firacode --yes
+# Install Fira Code for VSCode.
+sudo apt-get install fonts-firacode --yes
 
 # Install VIM
 sudo apt-get install vim --yes
@@ -37,46 +34,65 @@ sudo apt-get install curl --yes
 # source activate myenv
 
 # Install Fix for VSCode Python language server needed libssl 1.0.0
-sudo apt-get install multiarch-support --yes
-cd ~
-wget http://security.debian.org/debian-security/pool/updates/main/o/openssl/libssl1.0.0_1.0.1t-1+deb8u11_amd64.deb
-sudo dpkg -i libssl1.0.0_1.0.1t-1+deb8u11_amd64.deb
+# sudo apt-get install multiarch-support --yes
+# cd ~
+# wget http://security.debian.org/debian-security/pool/updates/main/o/openssl/libssl1.0.0_1.0.1t-1+deb8u11_amd64.deb
+# sudo dpkg -i libssl1.0.0_1.0.1t-1+deb8u11_amd64.deb
+
+# Install VSCode Extensions
+# code --install-extension CoenraadS.bracket-pair-colorizer
+# code --install-extension vscode-icons-team.vscode-icons
+# code --install-extension WakaTime.vscode-wakatime
+
+# code --install-extension ms-python.python
+# code --install-extension ms-python.anaconda-extension-pack
+# code --install-extension ms-vscode.cpptools
+# code --install-extension redhat.vscode-yaml
+# code --install-extension vscjava.vscode-java-pack
+# code --install-extension davidanson.vscode-markdownlint
+# code --install-extension redhat.vscode-xml
 
 # Install Android Malware Tools
-pip install -U androguard pyqt5 pyperclip
-sudo apt-get install qtdeclarative5-dev
+# pip install -U androguard pyqt5 pyperclip
+# sudo apt-get install qtdeclarative5-dev
 
 # Install Antibody
 curl -sL git.io/antibody | sh -s
 
 # Install C / C++ tools
-sudo apt-get install gcc gdb g++ clang-format make libtinfo5 --yes
+sudo apt-get install gcc gdb g++ clang-format make libtinfo5 libopenmpi-dev --yes
+
+## Install OpenMPI from Source... This is SLOW!
+# cd ~
+# wget https://download.open-mpi.org/release/open-mpi/v3.1/openmpi-3.1.3.tar.gz
+# tar -xvf openmpi-3.1.3.tar.gz
+# cd openmpi-3.1.3
+# ./configure --prefix="/home/$USER/.openmpi"
+# make
+# rm -r openmpi-3.1.3
+
 
 # Install Emscripten Stuff (not idempotent
-cd ~
-mkdir Tooling
-cd Tooling
-git clone https://github.com/juj/emsdk.git
-cd emsdk
-./emsdk install sdk-1.38.15-64bit
-./emsdk activate sdk-1.38.15-64bit
+# cd ~
+# mkdir Tooling
+# cd Tooling
+# git clone https://github.com/juj/emsdk.git
+# cd emsdk
+# ./emsdk install sdk-1.38.15-64bit
+# ./emsdk activate sdk-1.38.15-64bit
+
+# Install Rust Tools
+curl https://sh.rustup.rs -sSf | sh
+rustup component add rustfmt
+rustup component add clippy
 
 # Add Java tools
-sudo apt install openjdk-11-jdk
-sudo apt install openjdk-8-jdk
+sudo apt-get install openjdk-11-jdk openjdk-8-jdk maven --yes
 git clone https://github.com/gcuisinier/jenv.git ~/.jenv
 source ~/.zshrc
 jenv add /usr/lib/jvm/java-8-openjdk-amd64
 jenv add /usr/lib/jvm/java-11-openjdk-amd64
 jenv global 11.0
-sudo apt-get install maven --yes
-
-# Google Cloud
-# https://cloud.google.com/sdk/docs/#deb
-export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)"
-echo "deb http://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
-curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
-sudo apt-get install google-cloud-sdk --yes
 
 # Install N, Node, and the Native Module build tools 
 # Note: you need to remove the N_PREFIX value from zshrc prior to installation
@@ -96,17 +112,6 @@ npm i -g netlify-cli
 npm i -g fkill-cli
 npm i -g rimraf
 
-## Install OpenMPI from Apt
-sudo apt install libopenmpi-dev
-
-## Install OpenMPI from Source... This is SLOW!
-# cd ~
-# wget https://download.open-mpi.org/release/open-mpi/v3.1/openmpi-3.1.3.tar.gz
-# tar -xvf openmpi-3.1.3.tar.gz
-# cd openmpi-3.1.3
-# ./configure --prefix="/home/$USER/.openmpi"
-# make
-# rm -r openmpi-3.1.3
 
 ## Auto-remove stuff I don't need
 sudo apt autoremove -y
@@ -118,9 +123,3 @@ sudo apt autoremove -y
 
 # Alias for colonialzero
 # ssh seanmcbride@login.colonialone.gwu.edu
-
-# ipcluster start -n 4 --engines=MPIEngineSetLauncher
-# ipcluster nbextension enable --user
-# cd $IPYTHONDIR
-# vim ipcluster_config.py
-# I need to get the last line of this file and create a commend to append to this..

@@ -1,23 +1,22 @@
 {
-    "editor.fontFamily": "'Fira Code', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
-    "editor.fontLigatures": true,
-    "editor.formatOnSave": true,
-    "editor.suggestSelection": "first",
-    "editor.wordWrap": "on",
-    "files.autoSave": "afterDelay",
-    "files.exclude": {
-        "**/.classpath": true,
-        "**/.project": true,
-        "**/.settings": true,
-        "**/.factorypath": true
-    },
-    "git.autofetch": true,
-    "java.home": "/home/sean/.jenv/versions/11.0",
-    "python.dataScience.sendSelectionToInteractiveWindow": false,
-    "python.jediEnabled": false,
-    "terminal.integrated.rendererType": "dom",
-    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
-    "window.titleBarStyle": "custom",
-    "window.zoomLevel": 1,
-    "workbench.iconTheme": "vscode-icons"
+  "editor.fontFamily": "'Fira Code', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
+  "editor.fontLigatures": true,
+  "editor.formatOnSave": true,
+  "editor.suggestSelection": "first",
+  "editor.wordWrap": "on",
+  "files.autoSave": "afterDelay",
+  "files.exclude": {
+    "**/.classpath": true,
+    "**/.project": true,
+    "**/.settings": true,
+    "**/.factorypath": true
+  },
+  "git.autofetch": true,
+  "java.home": "/home/sean/.jenv/versions/11.0",
+  "python.dataScience.sendSelectionToInteractiveWindow": false,
+  "python.jediEnabled": false,
+  "terminal.integrated.rendererType": "dom",
+  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+  "window.titleBarStyle": "custom",
+  "window.zoomLevel": 1
 }
