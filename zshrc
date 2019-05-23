@@ -13,6 +13,11 @@ bindkey "^[[3~" delete-char
 # Add to my path
 export PATH=$HOME/bin:/usr/local/bin:$HOME/miniconda/bin:$PATH
 
+# Pyenv
+export PATH="/home/sean/.pyenv/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+
 # Antibody
 source <(antibody init)
 antibody bundle < ~/.zsh_plugins.txt
