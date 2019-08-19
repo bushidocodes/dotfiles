@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/zsh
 
 # Useful resources since I don't write BASH scripts too often
 # https://arslan.io/2019/07/03/how-to-write-idempotent-bash-scripts/
@@ -31,7 +31,7 @@ if [ -x "$(command -v antibody)" ]
 then
   antibody update
 else 
-  curl -sL git.io/antibody | sh -s
+  curl -sfL git.io/antibody | sudo sh -s - -b /usr/local/bin
 fi
 
 # Install C / C++ tools
@@ -41,13 +41,25 @@ sudo apt-get install gcc gdb g++ clang-format make libtinfo5 libopenmpi-dev --ye
 if [ -x "$(command -v rustup)" ]
 then
   rustup update
-  source ~/.zshrc
 else 
   curl https://sh.rustup.rs -sSf | sh
-  source ~/.zshrc
 fi
+source ~/.zshrc
 rustup component add rustfmt
 rustup component add clippy
+
+# Install Exercism
+if [ ! -x "$(command -v exercism)" ]; then
+  cd ~
+  curl -O -J -L https://github.com/exercism/cli/releases/download/v3.0.12/exercism-linux-64bit.tgz
+  tar -xvf exercism-linux-64bit.tgz
+  mkdir -p ~/bin
+  mv exercism ~/bin
+  rm exercism-linux-64bit.tgz
+  echo "Be sure to manually configure the Exercism CLI with your Token"
+fi
+exercism upgrade
+
 
 # Add Java tools
 sudo apt-get install openjdk-11-jdk openjdk-8-jdk maven --yes
