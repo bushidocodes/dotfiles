@@ -41,15 +41,17 @@ sudo apt-get install gcc gdb g++ clang-format make libtinfo5 libopenmpi-dev --ye
 if [ -x "$(command -v rustup)" ]
 then
   rustup update
+  source ~/.zshrc
 else 
   curl https://sh.rustup.rs -sSf | sh
+  source ~/.zshrc
 fi
 rustup component add rustfmt
 rustup component add clippy
 
 # Add Java tools
 sudo apt-get install openjdk-11-jdk openjdk-8-jdk maven --yes
-if [ ! -d "~/.jenv"]; then
+if [ ! -d "~/.jenv" ]; then
   git clone https://github.com/gcuisinier/jenv.git ~/.jenv
   source ~/.zshrc
 fi
@@ -70,6 +72,7 @@ jenv global 11.0
 if [ -x "$(command -v n)" ]
 then
   n-update -y
+  source ~/.zshrc
 else 
   curl -L https://git.io/n-install | bash
   source ~/.zshrc
