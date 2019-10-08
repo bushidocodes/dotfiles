@@ -33,14 +33,16 @@ eval "$(jenv init -)"
 # Emscripten
 # source ~/Tooling/emsdk/emsdk_env.sh > /dev/null
 
-# WSL aliases and environment vars
-if grep -q Microsoft /proc/version; then
-  alias open=Explorer.exe
-  # This allows WSL apps to open the default Windows browser via Explorer
-  # export BROWSER="/c/Program\Windows/explorer.exe"
-fi
-
 # Disable HiDPI Support
 export QT_AUTO_SCREEN_SCALE_FACTOR=1
 export QT_SCALE_FACTOR=1
 export GDK_SCALE=1
+
+# WSL aliases and environment vars
+# Some WSL distros seem to start in the Windows HOME directory, so explicitly cd
+if grep -q Microsoft /proc/version; then
+  cd ~
+  alias open=Explorer.exe
+  # This allows WSL apps to open the default Windows browser via Explorer
+  # export BROWSER="/c/Program\Windows/explorer.exe"
+fi
