@@ -40,7 +40,7 @@ export GDK_SCALE=1
 
 # WSL aliases and environment vars
 # Some WSL distros seem to start in the Windows HOME directory, so explicitly cd
-if grep -q Microsoft /proc/version; then
+if grep -i -q Microsoft /proc/version; then
   cd ~
   alias open=Explorer.exe
   # This allows WSL apps to open the default Windows browser via Explorer
