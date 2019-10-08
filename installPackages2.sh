@@ -4,9 +4,9 @@
 # https://arslan.io/2019/07/03/how-to-write-idempotent-bash-scripts/
 # https://tecadmin.net/tutorial/bash-scripting/
 
-# Setup Ubuntu
-sudo apt update --yes
-sudo apt upgrade --yes
+# Install Python Tools
+curl https://pyenv.run | bash
+sudo apt-get install python3 --yes
 
 # Add add-apt-repository based on https://itsfoss.com/add-apt-repository-command-not-found/
 sudo apt-get install software-properties-common --yes
