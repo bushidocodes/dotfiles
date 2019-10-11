@@ -4,29 +4,10 @@
 # https://arslan.io/2019/07/03/how-to-write-idempotent-bash-scripts/
 # https://tecadmin.net/tutorial/bash-scripting/
 
-# Install Python Tools
-curl https://pyenv.run | bash
-sudo apt-get install python3 --yes
-
-# Add add-apt-repository based on https://itsfoss.com/add-apt-repository-command-not-found/
-sudo apt-get install software-properties-common --yes
-
-# If running on WSL, wipe out the local.conf fonts file because WSL reuse of Windows host environment fonts caused issues using Windows apps while running X window apps
-if grep -q Microsoft /proc/version; then
-  echo "Ubuntu on Windows"
-  sudo rm -f /etc/fonts/local.conf
-fi
-
-# Install Fira Code for use in X Window Apps.
-sudo apt-get install fonts-firacode --yes
-
-# Install VIM
-sudo apt-get install vim --yes
-
-# Install Curl
-sudo apt-get install curl --yes
-
+##########################
 # Install Antibody
+##########################
+
 if [ -x "$(command -v antibody)" ]
 then
   antibody update
@@ -34,10 +15,16 @@ else
   curl -sfL git.io/antibody | sudo sh -s - -b /usr/local/bin
 fi
 
-# Install C / C++ tools
+##########################
+# Install C/C++
+##########################
+
 sudo apt-get install gcc gdb g++ clang-format make libtinfo5 libopenmpi-dev --yes
 
-# Install Rust Tools
+##########################
+# Install Rust
+##########################
+
 if [ -x "$(command -v rustup)" ]
 then
   rustup update
@@ -48,20 +35,10 @@ source ~/.zshrc
 rustup component add rustfmt
 rustup component add clippy
 
-# Install Exercism
-if [ ! -x "$(command -v exercism)" ]; then
-  cd ~
-  curl -O -J -L https://github.com/exercism/cli/releases/download/v3.0.12/exercism-linux-64bit.tgz
-  tar -xvf exercism-linux-64bit.tgz
-  mkdir -p ~/bin
-  mv exercism ~/bin
-  rm exercism-linux-64bit.tgz
-  echo "Be sure to manually configure the Exercism CLI with your Token"
-fi
-exercism upgrade
+##########################
+# Install Java
+##########################
 
-
-# Add Java tools
 sudo apt-get install openjdk-11-jdk openjdk-8-jdk maven --yes
 if [ ! -d "~/.jenv" ]; then
   git clone https://github.com/gcuisinier/jenv.git ~/.jenv
@@ -71,16 +48,25 @@ jenv add /usr/lib/jvm/java-8-openjdk-amd64
 jenv add /usr/lib/jvm/java-11-openjdk-amd64
 jenv global 11.0
 
-# Install N, Node, and the Native Module build tools 
+##########################
+# Install Python
+##########################
+
+# I use pyenv to manage my tools https://github.com/pyenv/pyenv
+if python3 --version | grep -q 'Python 3'; then
+  echo "Python 3.x is already installed and in path"
+else
+  echo "Installing Python 3"
+  curl https://pyenv.run | bash
+  pyenv install 3.7.4
+  pyenv global 3.7.4
+fi
+
+############################
+# Install Node.js 
+############################
+
 # Note: you need to remove the N_PREFIX value from zshrc prior to installation
-# n-install: ERROR:
-#   Aborting, because an existing definition of $N_PREFIX added by someone else
-#   was found in '/home/sean/.zshrc':
-
-#   export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"
-
-#   Please remove it and try again.
-# n-install: ERROR: ABORTING due to unexpected error.
 if [ -x "$(command -v n)" ]
 then
   n-update -y
@@ -90,32 +76,70 @@ else
   source ~/.zshrc
 fi
 
+############################
+# Install Misc Tools
+############################
+
+# Fira Code for X Window Apps
+sudo apt-get install fonts-firacode --yes 
+
+# Install VIM
+sudo apt-get install vim --yes
+
+# Install Curl
+sudo apt-get install curl --yes
+
+# Simple HTTP Server. https://www.npmjs.com/package/http-server
 if ! [ -x "$(command -v http-server)" ]; then
   npm i -g http-server
 fi
 
+# Netlify CLI. https://github.com/netlify/cli
 if ! [ -x "$(command -v netlify)" ]; then
   npm i -g netlify-cli
 fi
 
+# Fancy Kill. Nicer UX for killing processes
 if ! [ -x "$(command -v fkill)" ]; then
   npm i -g fkill-cli
 fi
 
-if ! [ -x "$(command -v rimraf)" ]; then
-  npm i -g rimraf
+# Rimraf tool. I'm unclear why this is getting installed globally
+# if ! [ -x "$(command -v rimraf)" ]; then
+#   npm i -g rimraf
+# fi
+
+# Install Exercism
+if [ ! -x "$(command -v exercism)" ]; then
+  cd ~
+  curl -O -J -L https://github.com/exercism/cli/releases/download/v3.0.12/exercism-linux-64bit.tgz
+  tar -xvf exercism-linux-64bit.tgz
+  mkdir -p ~/bin
+  mv exercism ~/bin
+  rm exercism-linux-64bit.tgz
+  echo "Be sure to manually configure the Exercism CLI with your Token"
+else 
+  exercism upgrade
 fi
 
-## Auto-remove stuff I don't need
+############################
+# WSL Specific 
+############################
+
+if grep -q Microsoft /proc/version; then
+  echo "WSL Detected"
+  # WSL reuse of Windows host environment fonts seems to cause issues using Windows apps while running X window apps
+  sudo rm -f /etc/fonts/local.conf
+fi
+
+############################
+# Cleanup
+############################
 sudo apt autoremove -y
 
-## TODO Stuff
-
-# Move to zshrc
-# sudo echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope
-
-# Alias for colonialzero
-# ssh seanmcbride@login.colonialone.gwu.edu
+############################
+# Unused archive of scripts
+############################
 
 ## Backup.... Install OpenMPI from Source... This is SLOW!
 # cd ~
