@@ -1,46 +1,39 @@
+# .zshrc is for interactive shell configuration. 
+# You set options for the interactive shell there with the setopt and unsetopt commands. 
+# You can also load shell modules, set your history options, change your prompt, set up zle and completion, et cetera. 
+# You also set any variables that are only used in the interactive shell (e.g. $LS_COLORS).
+# https://unix.stackexchange.com/questions/71253/what-should-shouldnt-go-in-zshenv-zshrc-zlogin-zprofile-zlogout
+
+# Before we do an zshrc, manually load zshenv and zprofile if not loaded as expected
+if [ -z "$LOADED_ZSHENV" ]; then
+  source $HOME/.zshenv
+fi
+
+if [ -z "$LOADED_ZPROFILE" ]; then
+  source $HOME/.zprofile
+fi
+
 # Setup History
 HISTFILE=~/.zhistory
 HISTSIZE=SAVEHIST=10000
 setopt sharehistory
 setopt extendedhistory
 
-# Set display env var to allow X forwarding
-export DISPLAY=127.0.0.1:0.0
-
 # Fix lack of Delete key binding
 bindkey "^[[3~" delete-char
-
-# Add to my path
-# export PATH=$HOME/bin:/usr/local/bin:$HOME/miniconda/bin:$PATH
-
-# Pyenv
-export PATH="/home/sean/.pyenv/bin:$PATH"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
 
 # Antibody
 source <(antibody init)
 antibody bundle < ~/.zsh_plugins.txt
 
-# Add OpenMPI to path
-# export PATH=$PATH:/home/sean/.openmpi/bin
-# export LD_LIBRARY_PATH=:/home/sean/.openmpi/lib/
+# Pyenv
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
 
-# Java managed by jenv
-export PATH="$HOME/.jenv/bin:$PATH"
+# Jenv
 eval "$(jenv init -)"
 
-# Emscripten
-# source ~/Tooling/emsdk/emsdk_env.sh > /dev/null
-
-# Disable HiDPI Support
-export QT_AUTO_SCREEN_SCALE_FACTOR=1
-export QT_SCALE_FACTOR=1
-export GDK_SCALE=1
-
-# WSL aliases and environment vars
+# alias open to behave like Mac in WSL
 if grep -i -q Microsoft /proc/version; then
   alias open=Explorer.exe
-  # This allows WSL apps to open the default Windows browser via Explorer
-  # export BROWSER="/c/Program\Windows/explorer.exe"
 fi

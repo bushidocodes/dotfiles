@@ -6,6 +6,9 @@
     ~/.bash_logout: bash_logout
     ~/.gitconfig: gitconfig
     ~/.zshrc: zshrc
+    ~/.zshenv: zshenv
+    ~/.zprofile: zprofile
+    ~/.gdbinit: gdbinit
     ~/.zsh_plugins.txt: zsh_plugins.txt
     ~/.config/Code/User/settings.json: vscode_settings.json
 
