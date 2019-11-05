@@ -21,7 +21,7 @@ fi
 ############################
 # Nuke config files and link dotfiles
 ############################
-rm ~/.profile ~/.bashrc ~/.bash_logout ~/.gitconfig ~/.zshrc ~/.zsh_plugins.txt
+rm ~/.profile ~/.bashrc ~/.bash_logout ~/.gitconfig ~/.zshrc ~/.zsh_plugins.txt ~/.zprofile
 mkdir -p ~/bin
 mkdir ~/.config/  
 mkdir ~/.config/Code/ 
