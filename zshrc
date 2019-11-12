@@ -37,3 +37,10 @@ eval "$(jenv init -)"
 if grep -i -q Microsoft /proc/version; then
   alias open=Explorer.exe
 fi
+# Wasmer
+export WASMER_DIR="/home/sean/.wasmer"
+[ -s "$WASMER_DIR/wasmer.sh" ] && source "$WASMER_DIR/wasmer.sh"
+
+export WASMTIME_HOME="$HOME/.wasmtime"
+
+export PATH="$WASMTIME_HOME/bin:$PATH"

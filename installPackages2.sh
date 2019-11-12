@@ -52,12 +52,20 @@ jenv global 11.0
 # Install Python
 ##########################
 
+# Python Build Dependencies
+sudo apt-get install build-essential libsqlite3-dev sqlite3 bzip2 libbz2-dev zlib1g-dev libssl-dev openssl libgdbm-dev libgdbm-compat-dev liblzma-dev libreadline-dev libncursesw5-dev libffi-dev uuid-dev
+
 # I use pyenv to manage my tools https://github.com/pyenv/pyenv
-if python3 --version | grep -q 'Python 3'; then
-  echo "Python 3.x is already installed and in path"
+if pyenv --version | grep -q 'pyenv 1'; then
+  echo "pyenv 1.x is already installed and in path"
 else
   echo "Installing Python 3"
   curl https://pyenv.run | bash
+fi 
+
+if python3 --version | grep -q 'Python 3.7.4'; then
+  echo "Python 3.7.4 is already installed and in path"
+else
   pyenv install 3.7.4
   pyenv global 3.7.4
 fi
@@ -123,10 +131,27 @@ else
 fi
 
 ############################
+# Docker 
+############################
+
+# sudo apt-get install -y \
+# 	apt-transport-https \
+# 	ca-certificates \
+# 	curl \
+# 	software-properties-common
+
+# curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+# sudo apt-key fingerprint 0EBFCD88
+# sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+# sudo apt-get install -y docker-ce
+# sudo usermod -aG docker $USER
+# pip install --user docker-compose
+
+############################
 # WSL Specific 
 ############################
 
-if grep -q Microsoft /proc/version; then
+if grep -qi Microsoft /proc/version; then
   echo "WSL Detected"
   # WSL reuse of Windows host environment fonts seems to cause issues using Windows apps while running X window apps
   sudo rm -f /etc/fonts/local.conf
