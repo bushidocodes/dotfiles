@@ -1,0 +1,5 @@
+- link:
+    /etc/wsl.conf: wsl.conf
+
+- shell:
+  - [git submodule update --init --recursive, Installing submodules]
