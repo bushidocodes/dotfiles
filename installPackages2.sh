@@ -189,7 +189,8 @@ else
 fi
 
 ############################
-# Docker 
+# Docker
+# Legacy Approach for WSL1
 ############################
 
 # sudo apt-get install -y \
@@ -217,6 +218,11 @@ if grep -qi Microsoft /proc/version; then
   ln -s /c/Users/Sean/.ssh ~/.ssh
 
 fi
+
+############################
+# QEMU
+############################
+sudo apt-get install qemu --yes
 
 ############################
 # Cleanup
