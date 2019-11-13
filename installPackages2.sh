@@ -22,6 +22,64 @@ fi
 sudo apt-get install gcc gdb g++ clang-format make libtinfo5 libopenmpi-dev --yes
 
 ##########################
+# LLVM
+# Based on https://apt.llvm.org/llvm.sh
+##########################
+
+LLVM_VERSION=9
+DISTRO=$(lsb_release -is)
+VERSION=$(lsb_release -sr)
+DIST_VERSION="${DISTRO}_${VERSION}"
+
+declare -A LLVM_VERSION_PATTERNS
+LLVM_VERSION_PATTERNS[8]="-8"
+LLVM_VERSION_PATTERNS[9]="-9"
+LLVM_VERSION_PATTERNS[10]=""
+
+if [ ! ${LLVM_VERSION_PATTERNS[$LLVM_VERSION]+_} ]; then
+    echo "This script does not support LLVM version $LLVM_VERSION"
+    exit 3
+fi
+
+LLVM_VERSION_STRING=${LLVM_VERSION_PATTERNS[$LLVM_VERSION]}
+
+# find the right repository name for the distro and version
+case "$DIST_VERSION" in
+    Debian_9* )       REPO_NAME="deb http://apt.llvm.org/stretch/  llvm-toolchain-stretch$LLVM_VERSION_STRING main" ;;
+    Debian_10* )      REPO_NAME="deb http://apt.llvm.org/buster/   llvm-toolchain-buster$LLVM_VERSION_STRING  main" ;;
+    Debian_unstable ) REPO_NAME="deb http://apt.llvm.org/unstable/ llvm-toolchain$LLVM_VERSION_STRING         main" ;;
+    Debian_testing )  REPO_NAME="deb http://apt.llvm.org/unstable/ llvm-toolchain$LLVM_VERSION_STRING         main" ;;
+    Ubuntu_16.04 )    REPO_NAME="deb http://apt.llvm.org/xenial/   llvm-toolchain-xenial$LLVM_VERSION_STRING  main" ;;
+    Ubuntu_18.04 )    REPO_NAME="deb http://apt.llvm.org/bionic/   llvm-toolchain-bionic$LLVM_VERSION_STRING  main" ;;
+    Ubuntu_18.10 )    REPO_NAME="deb http://apt.llvm.org/cosmic/   llvm-toolchain-cosmic$LLVM_VERSION_STRING  main" ;;
+    Ubuntu_19.04 )    REPO_NAME="deb http://apt.llvm.org/disco/    llvm-toolchain-disco$LLVM_VERSION_STRING   main" ;;
+    * )
+        echo "Distribution '$DISTRO' in version '$VERSION' is not supported by this script (${DIST_VERSION})."
+esac
+
+wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | sudo apt-key add -
+sudo add-apt-repository "${REPO_NAME}"
+sudo apt-get update
+sudo apt-get install -y clang-$LLVM_VERSION lldb-$LLVM_VERSION lld-$LLVM_VERSION clangd-$LLVM_VERSION
+
+# Note: The binaries are all suffixed by the major version, so symlink what we just installed
+LLVMFILES=/usr/bin/llvm-*
+CLANGFILES=/usr/bin/clang*
+LLC=/usr/bin/llc-3.6
+OPT=/usr/bin/opt-3.6
+
+for f in $LLVMFILES $CLANGFILES $LLC $OPT
+do
+	link=${f%-*}
+	echo "linking" $f "to" $link
+	sudo ln -s $f $link
+done
+
+# Additional Libraries needed for Silverfish
+sudo apt install libc++-dev --yes
+sudo apt install libc++abi-dev --yes
+
+##########################
 # Install Rust
 ##########################
 
