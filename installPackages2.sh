@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-# Useful resources since I don't write BASH scripts too often
+# Useful resources since I don't write shell scripts too often
 # https://arslan.io/2019/07/03/how-to-write-idempotent-bash-scripts/
 # https://tecadmin.net/tutorial/bash-scripting/
 
@@ -155,8 +155,8 @@ if grep -qi Microsoft /proc/version; then
   echo "WSL Detected"
   # WSL reuse of Windows host environment fonts seems to cause issues using Windows apps while running X window apps
   sudo rm -f /etc/fonts/local.conf
-  ln -s /c/Users/Sean winhome
-  ln -s /c/Users/Sean/.ssh .ssh
+  ln -s /c/Users/Sean ~/winhome
+  ln -s /c/Users/Sean/.ssh ~/.ssh
 
 fi
 
