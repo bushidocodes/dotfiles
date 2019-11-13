@@ -25,5 +25,6 @@ if grep -qi Microsoft /proc/version; then
   export WSL_VERSION=$(wsl.exe -l -v | grep -a '[*]' | sed 's/[^0-9]*//g')
   export WSL_HOST=$(tail -1 /etc/resolv.conf | cut -d' ' -f2)
   export DISPLAY=$WSL_HOST:0
-  export DOCKER_HOST=tcp://$WSL_HOST:2375
+  # Used to be used for Docker with WSL1. Commented out because now using WSL2
+  # export DOCKER_HOST=tcp://$WSL_HOST:2375
 fi
