@@ -163,6 +163,48 @@ fi
 # sudo usermod -aG docker $USER
 # pip install --user docker-compose
 
+
+###########################
+# Kubernetes
+###########################
+if [ ! -x "$(command -v kubectl)" ]; then
+  echo "Installing Kubectl"
+  sudo apt-get update && sudo apt-get install -y apt-transport-https
+  curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+  echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
+  sudo apt-get update
+  sudo apt-get install -y kubectl
+fi 
+
+# Helm 2
+if [ ! -x "$(command -v helm)" ]; then
+  echo "Installing Helm"
+  cd ~
+  wget https://get.helm.sh/helm-v2.16.1-linux-amd64.tar.gz   
+  tar -xvf helm-v2.16.1-linux-amd64.tar.gz linux-amd64/tiller linux-amd64/helm  
+  sudo mv linux-amd64/tiller /usr/bin
+  sudo mv linux-amd64/helm /usr/bin
+  rm -r linux-amd64
+  rm helm-v2.16.1-linux-amd64.tar.gz  
+  helm init --upgrade
+fi
+
+# Helm 3 - Too early !
+# curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
+
+############################
+# Open Whisk
+############################
+if [ ! -x "$(command -v wsk)" ]; then
+  echo "Installing OpenWhisk"
+  cd ~
+  wget https://github.com/apache/openwhisk-cli/releases/download/1.0.0/OpenWhisk_CLI-1.0.0-linux-amd64.tgz
+  tar -xvf OpenWhisk_CLI-1.0.0-linux-amd64.tgz wsk  
+  sudo mv wsk /usr/bin
+  rm OpenWhisk_CLI-1.0.0-linux-amd64.tgz 
+fi
+
+
 ############################
 # WSL Specific 
 ############################
@@ -171,8 +213,8 @@ if grep -qi Microsoft /proc/version; then
   echo "WSL Detected"
   # WSL reuse of Windows host environment fonts seems to cause issues using Windows apps while running X window apps
   sudo rm -f /etc/fonts/local.conf
-  ln -s /c/Users/Sean ~/winhome
-  ln -s /c/Users/Sean/.ssh ~/.ssh
+  ln -sf /c/Users/Sean ~/winhome
+  ln -sf /c/Users/Sean/.ssh ~/.ssh
 
 fi
 
