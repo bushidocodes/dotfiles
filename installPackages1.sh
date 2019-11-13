@@ -21,6 +21,8 @@ fi
 ############################
 # Nuke config files and link dotfiles
 ############################
+sudo ./installRoot
+mkdir ~/.cargo
 rm ~/.profile ~/.bashrc ~/.bash_logout ~/.gitconfig ~/.zshrc ~/.zsh_plugins.txt ~/.zprofile
 mkdir -p ~/bin
 mkdir ~/.config/  
