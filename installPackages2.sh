@@ -74,16 +74,30 @@ sudo apt-get install build-essential libsqlite3-dev sqlite3 bzip2 libbz2-dev zli
 if pyenv --version | grep -q 'pyenv 1'; then
   echo "pyenv 1.x is already installed and in path"
 else
-  echo "Installing Python 3"
+  echo "Installing Pyenv"
   curl https://pyenv.run | bash
+  source ~/.zshrc
+  pyenv install 3.7.5
+  pyenv global 3.7.5
 fi 
 
-if python3 --version | grep -q 'Python 3.7.4'; then
+if python3 --version | grep -q 'Python 3.7.5'; then
   echo "Python 3.7.4 is already installed and in path"
 else
   pyenv install 3.7.4
   pyenv global 3.7.4
 fi
+
+############################
+# Install Ansible
+############################
+if python3 --version | grep -q 'ansible'; then
+  echo "Ansible installed and in path"
+else 
+  sudo pip install -U ansible
+fi 
+
+ansible_python_interpreter=/usr/bin/python2
 
 ############################
 # Install Node.js 
