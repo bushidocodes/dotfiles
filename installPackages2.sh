@@ -91,7 +91,8 @@ fi
 ############################
 # Install Ansible
 ############################
-if python3 --version | grep -q 'ansible'; then
+if [ -x "$(command -v ansible)" ] 
+then
   echo "Ansible installed and in path"
 else 
   sudo pip install -U ansible
@@ -109,7 +110,7 @@ then
   n-update -y
   source ~/.zshrc
 else 
-  curl -L https://git.io/n-install | bash
+  curl -L https://git.io/n-install | bash -n
   source ~/.zshrc
 fi
 
