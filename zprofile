@@ -22,6 +22,16 @@ export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PR
 export LOADED_ZPROFILE=1
 
 if grep -qi Microsoft /proc/version; then
+
+  # Trim Node stuff from the Windows PATH we've imported into WSL to avoid conflicts
+  # Based on https://github.com/WhitewaterFoundry/pengwin-setup/commit/cea92cd2438e522d1d81accc43e6884e8d762b62
+  WIN_NPM_PATH="$(dirname "$(which npm)")"
+  WIN_YARN_PATH="$(dirname "\$(which yarn)")"
+  WIN_C_PATH="$(wslpath 'C:\')"
+  export PATH=$(echo "${PATH}" | sed -e "s#${WIN_NPM_PATH}##")
+  export PATH=$(echo "${PATH}" | sed -e "s#${WIN_YARN_PATH}##")
+
+  # Convenience helpers
   export WSL_VERSION=$(wsl.exe -l -v | grep -a '[*]' | sed 's/[^0-9]*//g')
   export WSL_HOST=$(tail -1 /etc/resolv.conf | cut -d' ' -f2)
   export DISPLAY=$WSL_HOST:0
