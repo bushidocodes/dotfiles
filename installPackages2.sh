@@ -95,7 +95,9 @@ if [ -x "$(command -v ansible)" ]
 then
   echo "Ansible installed and in path"
 else 
-  sudo pip install -U ansible
+  sudo apt-add-repository ppa:ansible/ansible
+  sudo apt update
+  sudo apt install ansible
 fi 
 
 ansible_python_interpreter=/usr/bin/python2
