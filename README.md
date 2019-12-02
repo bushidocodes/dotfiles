@@ -79,7 +79,14 @@ As mentioned above, Windows currently cannot be automated as completely as a *NI
 Create /etc/wsl.conf with the following:
 ```
 [automount]
-options = "metadata"
+enabled             = true
+crossDistro         = true
+root                = /
+options             = metadata
+
+[interop]
+enabled             = true 
+appendWindowsPath   = true
 ```
 Then terminate your WSL distro to force the changes to take effect:
 
@@ -89,9 +96,8 @@ wsl.exe --terminate <distro_name>
 
 10. Link SSH from Windows and make sure the config files have the proper metadata configured:
 ```sh
-cd ~
-ln -s /mnt/c/Users/Sean ~/winhome  
-ln -s ~/winhome/.ssh ~/.ssh
+ln -s /c/Users/Sean ~/winhome  
+ln -s /c/Users/Sean/.ssh ~/.ssh
 sudo chmod 644 ~/.ssh/config
 chmod 400 ~/.ssh/id_rsa
 ```
