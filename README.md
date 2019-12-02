@@ -104,10 +104,10 @@ chmod 400 ~/.ssh/id_rsa
 
 ## Linux Stuff
 
-1. Clone gitfiles and run ./installPackages.sh to install zsh and link dotfiles
+1. Install a System Python Interpreter
+`sudo apt-get install python-pip`
 
-Note: You might receive an error if your system does not have a Python interpreter installed natively. If this is the case, run `sudo apt-get install python3.7`
-
+2. Clone gitfiles and run ./installPackages.sh to install zsh and link dotfiles
 ```sh
 git clone git@github.com:bushidocodes/dotfiles.git
 mv dotfiles .dotfiles
@@ -115,7 +115,7 @@ cd ~/.dotfiles/
 ./installPackages1.sh
 ```
 
-2. Customize Shell, Install dev tools
+3. Customize Shell, Install dev tools
 ```sh
 cd ~/.dotfiles/
 ./installPackages2.sh
