@@ -4,6 +4,19 @@
 # https://arslan.io/2019/07/03/how-to-write-idempotent-bash-scripts/
 # https://tecadmin.net/tutorial/bash-scripting/
 
+############################
+# Install Misc Tools
+############################
+
+# Fira Code for X Window Apps
+sudo apt-get install fonts-firacode --yes 
+
+# Install VIM
+sudo apt-get install vim --yes
+
+# Install Curl
+sudo apt-get install curl --yes
+
 ##########################
 # Install Antibody
 ##########################
@@ -106,28 +119,17 @@ ansible_python_interpreter=/usr/bin/python2
 # Install Node.js 
 ############################
 
-# Note: you need to remove the N_PREFIX value from zshrc prior to installation
 if [ -x "$(command -v n)" ]
 then
+  echo "n installed and in path"
   n-update -y
   source ~/.zshrc
-else 
-  curl -L https://git.io/n-install | bash -n
+else
+  # We use the -n argument because we have already configured our profile in our .dotfiles repo for n
+  curl -L https://git.io/n-install | bash -s -- -n
+  sudo chown -R $USER:$(id -gn $USER) /home/sean/.config
   source ~/.zshrc
 fi
-
-############################
-# Install Misc Tools
-############################
-
-# Fira Code for X Window Apps
-sudo apt-get install fonts-firacode --yes 
-
-# Install VIM
-sudo apt-get install vim --yes
-
-# Install Curl
-sudo apt-get install curl --yes
 
 # Simple HTTP Server. https://www.npmjs.com/package/http-server
 if ! [ -x "$(command -v http-server)" ]; then
