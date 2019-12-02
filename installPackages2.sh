@@ -82,10 +82,10 @@ else
 fi 
 
 if python3 --version | grep -q 'Python 3.7.5'; then
-  echo "Python 3.7.4 is already installed and in path"
+  echo "Python 3.7.5 is already installed and in path"
 else
-  pyenv install 3.7.4
-  pyenv global 3.7.4
+  pyenv install 3.7.5
+  pyenv global 3.7.5
 fi
 
 ############################
