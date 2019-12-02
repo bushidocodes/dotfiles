@@ -214,14 +214,14 @@ fi
 ############################
 # Open Whisk
 ############################
-if [ ! -x "$(command -v wsk)" ]; then
-  echo "Installing OpenWhisk"
-  cd ~
-  wget https://github.com/apache/openwhisk-cli/releases/download/1.0.0/OpenWhisk_CLI-1.0.0-linux-amd64.tgz
-  tar -xvf OpenWhisk_CLI-1.0.0-linux-amd64.tgz wsk  
-  sudo mv wsk /usr/bin
-  rm OpenWhisk_CLI-1.0.0-linux-amd64.tgz 
-fi
+# if [ ! -x "$(command -v wsk)" ]; then
+#   echo "Installing OpenWhisk"
+#   cd ~
+#   wget https://github.com/apache/openwhisk-cli/releases/download/1.0.0/OpenWhisk_CLI-1.0.0-linux-amd64.tgz
+#   tar -xvf OpenWhisk_CLI-1.0.0-linux-amd64.tgz wsk  
+#   sudo mv wsk /usr/bin
+#   rm OpenWhisk_CLI-1.0.0-linux-amd64.tgz 
+# fi
 
 
 ############################
