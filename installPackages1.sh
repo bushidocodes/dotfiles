@@ -25,7 +25,7 @@ sudo ./installRoot
 mkdir ~/.cargo
 rm ~/.profile ~/.bashrc ~/.bash_logout ~/.gitconfig ~/.zshrc ~/.zsh_plugins.txt ~/.zprofile
 mkdir -p ~/bin
-mkdir ~/.config/  
-mkdir ~/.config/Code/ 
-mkdir ~/.config/Code/User/
-./install
+mkdir -p ~/.config/  
+mkdir -p ~/.config/Code/ 
+mkdir -p ~/.config/Code/User/
+sudo ./install
