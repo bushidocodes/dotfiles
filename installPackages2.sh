@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/bash
 
 # Useful resources since I don't write shell scripts too often
 # https://arslan.io/2019/07/03/how-to-write-idempotent-bash-scripts/
@@ -9,30 +9,19 @@
 ############################
 
 # Fira Code for X Window Apps
-sudo apt-get install fonts-firacode --yes 
+sudo apt install fonts-firacode --yes 
 
 # Install VIM
-sudo apt-get install vim --yes
+sudo apt install vim --yes
 
 # Install Curl
-sudo apt-get install curl --yes
-
-##########################
-# Install Antibody
-##########################
-
-if [ -x "$(command -v antibody)" ]
-then
-  antibody update
-else 
-  curl -sfL git.io/antibody | sudo sh -s - -b /usr/local/bin
-fi
+sudo apt install curl --yes
 
 ##########################
 # Install C/C++
 ##########################
 
-sudo apt-get install gcc gdb g++ clang-format make libtinfo5 libopenmpi-dev --yes
+sudo apt install gcc gdb g++ clang-format make libtinfo5 libopenmpi-dev --yes
 
 ##########################
 # LLVM
@@ -59,7 +48,8 @@ then
 else 
   curl https://sh.rustup.rs -sSf | sh
 fi
-source ~/.zshrc
+source ~/.profile
+source ~/.bashrc
 rustup component add rustfmt
 rustup component add clippy
 
@@ -67,10 +57,11 @@ rustup component add clippy
 # Install Java
 ##########################
 
-sudo apt-get install openjdk-11-jdk openjdk-8-jdk maven --yes
+sudo apt install openjdk-11-jdk openjdk-8-jdk maven --yes
 if [ ! -d "~/.jenv" ]; then
   git clone https://github.com/gcuisinier/jenv.git ~/.jenv
-  source ~/.zshrc
+  source ~/.profile
+  source ~/.bashrc
 fi
 jenv add /usr/lib/jvm/java-8-openjdk-amd64
 jenv add /usr/lib/jvm/java-11-openjdk-amd64
@@ -81,7 +72,7 @@ jenv global 11.0
 ##########################
 
 # Python Build Dependencies
-sudo apt-get install build-essential libsqlite3-dev sqlite3 bzip2 libbz2-dev zlib1g-dev libssl-dev openssl libgdbm-dev libgdbm-compat-dev liblzma-dev libreadline-dev libncursesw5-dev libffi-dev uuid-dev
+sudo apt install build-essential libsqlite3-dev sqlite3 bzip2 libbz2-dev zlib1g-dev libssl-dev openssl libgdbm-dev libgdbm-compat-dev liblzma-dev libreadline-dev libncursesw5-dev libffi-dev uuid-dev --yes
 
 # I use pyenv to manage my tools https://github.com/pyenv/pyenv
 if pyenv --version | grep -q 'pyenv 1'; then
@@ -89,7 +80,8 @@ if pyenv --version | grep -q 'pyenv 1'; then
 else
   echo "Installing Pyenv"
   curl https://pyenv.run | bash
-  source ~/.zshrc
+  source ~/.profile
+  source ~/.bashrc
   pyenv install 3.7.5
   pyenv global 3.7.5
 fi 
@@ -110,7 +102,7 @@ then
 else 
   sudo apt-add-repository ppa:ansible/ansible
   sudo apt update
-  sudo apt install ansible
+  sudo apt install ansible --yes
 fi 
 
 ansible_python_interpreter=/usr/bin/python2
@@ -123,12 +115,14 @@ if [ -x "$(command -v n)" ]
 then
   echo "n installed and in path"
   n-update -y
-  source ~/.zshrc
+  source ~/.profile
+  source ~/.bashrc
 else
   # We use the -n argument because we have already configured our profile in our .dotfiles repo for n
   curl -L https://git.io/n-install | bash -s -- -n
   sudo chown -R $USER:$(id -gn $USER) /home/sean/.config
-  source ~/.zshrc
+  source ~/.profile
+  source ~/.bashrc
 fi
 
 # Simple HTTP Server. https://www.npmjs.com/package/http-server
@@ -146,11 +140,6 @@ if ! [ -x "$(command -v fkill)" ]; then
   npm i -g fkill-cli
 fi
 
-# Rimraf tool. I'm unclear why this is getting installed globally
-# if ! [ -x "$(command -v rimraf)" ]; then
-#   npm i -g rimraf
-# fi
-
 # Install Exercism
 if [ ! -x "$(command -v exercism)" ]; then
   cd ~
@@ -164,49 +153,30 @@ else
   exercism upgrade
 fi
 
-############################
-# Docker
-# Legacy Approach for WSL1
-############################
-
-# sudo apt-get install -y \
-# 	apt-transport-https \
-# 	ca-certificates \
-# 	curl \
-# 	software-properties-common
-
-# curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-# sudo apt-key fingerprint 0EBFCD88
-# sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
-# sudo apt-get install -y docker-ce
-# sudo usermod -aG docker $USER
-# pip install --user docker-compose
-
-
 ###########################
 # Kubernetes
 ###########################
-if [ ! -x "$(command -v kubectl)" ]; then
-  echo "Installing Kubectl"
-  sudo apt-get update && sudo apt-get install -y apt-transport-https
-  curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
-  echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
-  sudo apt-get update
-  sudo apt-get install -y kubectl
-fi 
+# if [ ! -x "$(command -v kubectl)" ]; then
+#   echo "Installing Kubectl"
+#   sudo apt-get update && sudo apt-get install -y apt-transport-https
+#   curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+#   echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
+#   sudo apt-get update
+#   sudo apt-get install -y kubectl
+# fi 
 
 # Helm 2
-if [ ! -x "$(command -v helm)" ]; then
-  echo "Installing Helm"
-  cd ~
-  wget https://get.helm.sh/helm-v2.16.1-linux-amd64.tar.gz   
-  tar -xvf helm-v2.16.1-linux-amd64.tar.gz linux-amd64/tiller linux-amd64/helm  
-  sudo mv linux-amd64/tiller /usr/bin
-  sudo mv linux-amd64/helm /usr/bin
-  rm -r linux-amd64
-  rm helm-v2.16.1-linux-amd64.tar.gz  
-  helm init --upgrade
-fi
+# if [ ! -x "$(command -v helm)" ]; then
+#   echo "Installing Helm"
+#   cd ~
+#   wget https://get.helm.sh/helm-v2.16.1-linux-amd64.tar.gz   
+#   tar -xvf helm-v2.16.1-linux-amd64.tar.gz linux-amd64/tiller linux-amd64/helm  
+#   sudo mv linux-amd64/tiller /usr/bin
+#   sudo mv linux-amd64/helm /usr/bin
+#   rm -r linux-amd64
+#   rm helm-v2.16.1-linux-amd64.tar.gz  
+#   helm init --upgrade
+# fi
 
 # Helm 3 - Too early !
 # curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
@@ -228,19 +198,20 @@ fi
 # WSL Specific 
 ############################
 
-if grep -qi Microsoft /proc/version; then
-  echo "WSL Detected"
+# if grep -qi Microsoft /proc/version; then
+  # echo "WSL Detected"
   # WSL reuse of Windows host environment fonts seems to cause issues using Windows apps while running X window apps
-  sudo rm -f /etc/fonts/local.conf
-  ln -sf /c/Users/Sean ~/winhome
-  ln -sf /c/Users/Sean/.ssh ~/.ssh
+  # sudo rm -f /etc/fonts/local.conf
+  # Assume that this was done manually as part of README
+  # ln -sf /c/Users/Sean ~/winhome
+  # ln -sf /c/Users/Sean/.ssh ~/.ssh
 
-fi
+# fi
 
 ############################
 # QEMU
 ############################
-sudo apt-get install qemu --yes
+sudo apt install qemu --yes
 
 ############################
 # Cleanup
@@ -251,16 +222,6 @@ sudo apt autoremove -y
 # Unused archive of scripts
 ############################
 
-## Backup.... Install OpenMPI from Source... This is SLOW!
-# cd ~
-# wget https://download.open-mpi.org/release/open-mpi/v3.1/openmpi-3.1.3.tar.gz
-# tar -xvf openmpi-3.1.3.tar.gz
-# cd openmpi-3.1.3
-# ./configure --prefix="/home/$USER/.openmpi"
-# make
-# rm -r openmpi-3.1.3
-
-
 # Install Emscripten Stuff (not idempotent
 # cd ~
 # mkdir Tooling
@@ -269,24 +230,3 @@ sudo apt autoremove -y
 # cd emsdk
 # ./emsdk install sdk-1.38.15-64bit
 # ./emsdk activate sdk-1.38.15-64bit
-
-# Install Fix for VSCode Python language server needed libssl 1.0.0
-# sudo apt-get install multiarch-support --yes
-# cd ~
-# wget http://security.debian.org/debian-security/pool/updates/main/o/openssl/libssl1.0.0_1.0.1t-1+deb8u11_amd64.deb
-# sudo dpkg -i libssl1.0.0_1.0.1t-1+deb8u11_amd64.deb
-
-# Install Android Malware Tools
-# pip install -U androguard pyqt5 pyperclip
-# sudo apt-get install qtdeclarative5-dev
-
-# Get Miniconda and make it the main python interpreter
-# Warning: Not idempotent
-# wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda.sh 
-# chmod +x ~/miniconda.sh
-# zsh ~/miniconda.sh -b -p ~/miniconda
-# rm ~/miniconda.sh
-# export PATH=$PATH:$HOME/miniconda/bin
-# conda update --prefix /home/sean/miniconda anaconda
-# conda create --name myenv --yes
-# source activate myenv

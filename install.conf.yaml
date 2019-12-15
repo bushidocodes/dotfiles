@@ -1,17 +1,13 @@
-- clean: ['~']
+- clean: ["~"]
 
 - link:
     ~/.profile: profile
     ~/.bashrc: bashrc
     ~/.bash_logout: bash_logout
     ~/.gitconfig: gitconfig
-    ~/.zshrc: zshrc
-    ~/.zshenv: zshenv
-    ~/.zprofile: zprofile
     ~/.gdbinit: gdbinit
-    ~/.zsh_plugins.txt: zsh_plugins.txt
     ~/.config/Code/User/settings.json: vscode_settings.json
     ~/.cargo/config: cargoConfig
 
 - shell:
-  - [git submodule update --init --recursive, Installing submodules]
+    - [git submodule update --init --recursive, Installing submodules]
