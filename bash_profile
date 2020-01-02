@@ -1,8 +1,4 @@
-# ~/.profile: executed by the command interpreter for login shells.
-# This file is not read by bash(1), if ~/.bash_profile or ~/.bash_login
-# exists.
-# see /usr/share/doc/bash/examples/startup-files for examples.
-# the files are located in the bash-doc package.
+# ~/.bash_profile: executed by the command interpreter for login shells.
 
 # the default umask is set in /etc/profile; for setting the umask
 # for ssh logins, install and configure the libpam-umask package.
@@ -68,6 +64,9 @@ export WASMER_DIR="/home/sean/.wasmer"
 [ -s "$WASMER_DIR/wasmer.sh" ] && source "$WASMER_DIR/wasmer.sh"
 export WASMTIME_HOME="$HOME/.wasmtime"
 export PATH="$WASMTIME_HOME/bin:$PATH"
+
+# Emscripten
+source ~/emsdk/emsdk_env.sh > /dev/null
 
 # WSL Convenience helpers
 if grep -qi Microsoft /proc/version; then

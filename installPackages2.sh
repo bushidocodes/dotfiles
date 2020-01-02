@@ -162,6 +162,52 @@ else
 fi
 
 ###########################
+# Wasmer
+###########################
+if [ ! -x "$(command -v wasmer)" ]; then
+  curl https://get.wasmer.io -sSfL | sh
+fi 
+
+###########################
+# Wasmtime
+###########################
+if [ ! -x "$(command -v wasmtime)" ]; then
+  curl https://wasmtime.dev/install.sh -sSf | bash
+fi
+
+###########################
+# WAVM Pre-Release Nightly
+###########################
+if [ ! -x "$(command -v wavm)" ]; then
+  WAVM_DEB_PATH=https://github.com/WAVM/WAVM/releases/download/nightly%2F2019-12-25/wavm-0.0.0-prerelease-linux.deb
+  WAVM_DEB_NAME=wavm-0.0.0-prerelease-linux.deb
+  cd ~
+  wget $WAVM_DEB_PATH
+  mv $WAVM_DEB_NAME wavm-1.0.0-linux.deb
+  sudo apt install ./wavm-1.0.0-linux.deb
+  rm wavm-1.0.0-linux.deb
+fi
+
+############################
+# QEMU
+############################
+sudo apt install qemu --yes
+
+############################
+# Emscripten
+############################
+
+if [ ! -x "$(command -v emsdk)" ]; then
+  cd ~
+  git clone https://github.com/emscripten-core/emsdk
+  # Update and activate latest
+  cd ~/emsdk
+  ./emsdk install latest
+  ./emsdk activate latest
+  cd ~
+fi
+
+###########################
 # Kubernetes
 ###########################
 # if [ ! -x "$(command -v kubectl)" ]; then
@@ -216,25 +262,8 @@ fi
 
 # fi
 
-############################
-# QEMU
-############################
-sudo apt install qemu --yes
 
 ############################
 # Cleanup
 ############################
 sudo apt autoremove -y
-
-############################
-# Unused archive of scripts
-############################
-
-# Install Emscripten Stuff (not idempotent
-# cd ~
-# mkdir Tooling
-# cd Tooling
-# git clone https://github.com/juj/emsdk.git
-# cd emsdk
-# ./emsdk install sdk-1.38.15-64bit
-# ./emsdk activate sdk-1.38.15-64bit
