@@ -54,6 +54,14 @@ rustup component add rustfmt
 rustup component add clippy
 
 ##########################
+# Install Go
+##########################
+
+sudo snap install go --classic
+mkdir -p $HOME/go
+go env -w GOPATH=$HOME/go     
+
+##########################
 # Install Java
 ##########################
 

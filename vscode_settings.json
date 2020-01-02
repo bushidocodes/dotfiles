@@ -18,7 +18,7 @@
   "terminal.integrated.rendererType": "dom",
   "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
   "window.titleBarStyle": "custom",
-  "window.zoomLevel": 2,
+  "window.zoomLevel": 0,
   "peacock.favoriteColors": [
     {
       "name": "Angular Red",

@@ -53,6 +53,9 @@ eval "$(pyenv virtualenv-init -)"
 export PATH="$HOME/.jenv/bin:$PATH"
 eval "$(jenv init -)"
 
+# Go 
+export GOPATH="$HOME/go" 
+
 # Cargo
 export PATH="$HOME/.cargo/bin:$PATH"
 
