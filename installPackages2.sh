@@ -5,6 +5,19 @@
 # https://tecadmin.net/tutorial/bash-scripting/
 
 ############################
+# Configure Git
+# Note: Fill in email and fullname below to set
+############################
+email=""
+fullname=""
+
+if [[ ! -z "$email"  && ! -z "$fullname" ]]; then
+  git config --global user.name "$fullname"
+  git config --global user.email "$email"
+fi
+
+
+############################
 # Install Misc Tools
 ############################
 
