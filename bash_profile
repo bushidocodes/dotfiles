@@ -62,11 +62,14 @@ export PATH="$N_PREFIX/bin:$PATH"
 # Wasmer
 export WASMER_DIR="/home/sean/.wasmer"
 [ -s "$WASMER_DIR/wasmer.sh" ] && source "$WASMER_DIR/wasmer.sh"
+
+# Wasmtime
 export WASMTIME_HOME="$HOME/.wasmtime"
 export PATH="$WASMTIME_HOME/bin:$PATH"
 
 # Emscripten
-source ~/emsdk/emsdk_env.sh > /dev/null
+# Note: This klobbers my Python and Node.js interpreters, so I only want to do this when needed
+# source ~/emsdk/emsdk_env.sh > /dev/null
 
 # WSL Convenience helpers
 if grep -qi Microsoft /proc/version; then

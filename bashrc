@@ -126,6 +126,3 @@ fi
 # This might need to be uncommented if you have trouble running your shell as a login shell
 # source ~/.profile
 
-# Wasmer
-export WASMER_DIR="/home/sean/.wasmer"
-[ -s "$WASMER_DIR/wasmer.sh" ] && source "$WASMER_DIR/wasmer.sh"
