@@ -3,6 +3,7 @@
 # Useful resources since I don't write shell scripts too often
 # https://arslan.io/2019/07/03/how-to-write-idempotent-bash-scripts/
 # https://tecadmin.net/tutorial/bash-scripting/
+# https://www.gnu.org/software/bash/manual/bash.html
 
 ############################
 # Configure Git
@@ -16,7 +17,6 @@ if [[ ! -z "$email"  && ! -z "$fullname" ]]; then
   git config --global user.email "$email"
 fi
 
-
 ############################
 # Install Misc Tools
 ############################
@@ -29,6 +29,12 @@ sudo apt install vim --yes
 
 # Install Curl
 sudo apt install curl --yes
+
+# Install HTTPie
+sudo apt install httpie --yes
+
+# Install Apache Bench
+sudo apt install apache2-utils --yes
 
 ##########################
 # Install C/C++
@@ -55,12 +61,12 @@ sudo apt install libc++abi-dev --yes
 # Install Rust
 ##########################
 
-if [ -x "$(command -v rustup)" ]
-then
+if [[ -x "$(command -v rustup)" ]]; then
   rustup update
 else 
   curl https://sh.rustup.rs -sSf | sh
 fi
+
 source ~/.profile
 source ~/.bashrc
 rustup component add rustfmt
@@ -79,11 +85,13 @@ go env -w GOPATH=$HOME/go
 ##########################
 
 sudo apt install openjdk-11-jdk openjdk-8-jdk maven --yes
-if [ ! -d "~/.jenv" ]; then
+
+if [[ ! -d "~/.jenv" ]]; then
   git clone https://github.com/gcuisinier/jenv.git ~/.jenv
   source ~/.profile
   source ~/.bashrc
 fi
+
 jenv add /usr/lib/jvm/java-8-openjdk-amd64
 jenv add /usr/lib/jvm/java-11-openjdk-amd64
 jenv global 11.0
@@ -117,8 +125,7 @@ fi
 ############################
 # Install Ansible
 ############################
-if [ -x "$(command -v ansible)" ] 
-then
+if [[ -x "$(command -v ansible)" ]]; then
   echo "Ansible installed and in path"
 else 
   sudo apt-add-repository ppa:ansible/ansible
@@ -132,8 +139,7 @@ ansible_python_interpreter=/usr/bin/python2
 # Install Node.js 
 ############################
 
-if [ -x "$(command -v n)" ]
-then
+if [[ -x "$(command -v n)" ]]; then
   echo "n installed and in path"
   n-update -y
   source ~/.profile
@@ -147,22 +153,22 @@ else
 fi
 
 # Simple HTTP Server. https://www.npmjs.com/package/http-server
-if ! [ -x "$(command -v http-server)" ]; then
+if [[ ! -x "$(command -v http-server)" ]]; then
   npm i -g http-server
 fi
 
 # Netlify CLI. https://github.com/netlify/cli
-if ! [ -x "$(command -v netlify)" ]; then
+if [[ ! -x "$(command -v netlify)" ]]; then
   npm i -g netlify-cli
 fi
 
 # Fancy Kill. Nicer UX for killing processes
-if ! [ -x "$(command -v fkill)" ]; then
+if [[ ! -x "$(command -v fkill)" ]]; then
   npm i -g fkill-cli
 fi
 
 # Install Exercism
-if [ ! -x "$(command -v exercism)" ]; then
+if [[ ! -x "$(command -v exercism)" ]]; then
   cd ~
   curl -O -J -L https://github.com/exercism/cli/releases/download/v3.0.12/exercism-linux-64bit.tgz
   tar -xvf exercism-linux-64bit.tgz
@@ -177,21 +183,21 @@ fi
 ###########################
 # Wasmer
 ###########################
-if [ ! -x "$(command -v wasmer)" ]; then
+if [[ ! -x "$(command -v wasmer)" ]]; then
   curl https://get.wasmer.io -sSfL | sh
 fi 
 
 ###########################
 # Wasmtime
 ###########################
-if [ ! -x "$(command -v wasmtime)" ]; then
+if [[ ! -x "$(command -v wasmtime)" ]]; then
   curl https://wasmtime.dev/install.sh -sSf | bash
 fi
 
 ###########################
 # WAVM Pre-Release Nightly
 ###########################
-if [ ! -x "$(command -v wavm)" ]; then
+if [[ ! -x "$(command -v wavm)" ]]; then
   WAVM_DEB_PATH=https://github.com/WAVM/WAVM/releases/download/nightly%2F2019-12-25/wavm-0.0.0-prerelease-linux.deb
   WAVM_DEB_NAME=wavm-0.0.0-prerelease-linux.deb
   cd ~
@@ -210,7 +216,7 @@ sudo apt install qemu --yes
 # Emscripten
 ############################
 
-if [ ! -x "$(command -v emsdk)" ]; then
+if [[ ! -x "$(command -v emsdk)" ]]; then
   cd ~
   git clone https://github.com/emscripten-core/emsdk
   # Update and activate latest
