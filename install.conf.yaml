@@ -1,6 +1,7 @@
 - clean: ["~"]
 
 - link:
+    ~/.common: common.sh
     ~/.bash_profile: bash_profile.sh
     ~/.bashrc: bashrc.sh
     ~/.bash_logout: bash_logout.sh
