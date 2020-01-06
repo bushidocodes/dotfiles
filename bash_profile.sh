@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # ~/.bash_profile: executed by the command interpreter for login shells.
 
 # the default umask is set in /etc/profile; for setting the umask
@@ -17,7 +19,7 @@ if grep -qi Microsoft /proc/version; then
   
   WIN_YARN_PATH="$(dirname "\$(which yarn)")"
   if [[ "\${WIN_YARN_PATH}" == "\${WIN_C_PATH}"* ]]; then
-    export PATH=$(echo "\${PATH}" | sed -e "s#\${WIN_YARN_PATH}##")
+    export PATH=$(echo "${PATH}" | sed -e "s#${WIN_YARN_PATH}##")
   fi
 fi
 
@@ -78,6 +80,9 @@ if grep -qi Microsoft /proc/version; then
   export WSL_HOST=$(tail -1 /etc/resolv.conf | cut -d' ' -f2)
   export DISPLAY=$WSL_HOST:0
 fi
+
+# Ansible Stuff
+export ansible_python_interpreter=/usr/bin/python2
 
 # # if running bash
 # if [ -n "$BASH_VERSION" ]; then

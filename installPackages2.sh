@@ -77,8 +77,8 @@ rustup component add clippy
 ##########################
 
 sudo snap install go --classic
-mkdir -p $HOME/go
-go env -w GOPATH=$HOME/go     
+mkdir -p "$HOME/go"
+go env -w GOPATH="$HOME/go"   
 
 ##########################
 # Install Java
@@ -86,7 +86,7 @@ go env -w GOPATH=$HOME/go
 
 sudo apt install openjdk-11-jdk openjdk-8-jdk maven --yes
 
-if [[ ! -d "~/.jenv" ]]; then
+if [[ ! -d "$HOME/.jenv" ]]; then
   git clone https://github.com/gcuisinier/jenv.git ~/.jenv
   source ~/.profile
   source ~/.bashrc
@@ -133,7 +133,7 @@ else
   sudo apt install ansible --yes
 fi 
 
-ansible_python_interpreter=/usr/bin/python2
+export ansible_python_interpreter=/usr/bin/python2
 
 ############################
 # Install Node.js 
@@ -147,10 +147,16 @@ if [[ -x "$(command -v n)" ]]; then
 else
   # We use the -n argument because we have already configured our profile in our .dotfiles repo for n
   curl -L https://git.io/n-install | bash -s -- -n
-  sudo chown -R $USER:$(id -gn $USER) /home/sean/.config
+  sudo chown -R "$USER":"$(id -gn "$USER")" /home/sean/.config
   source ~/.profile
   source ~/.bashrc
 fi
+
+############################
+# Bash Stuff
+############################
+npm i -g bats
+sudo apt install shellcheck -y
 
 # Simple HTTP Server. https://www.npmjs.com/package/http-server
 if [[ ! -x "$(command -v http-server)" ]]; then
@@ -169,7 +175,7 @@ fi
 
 # Install Exercism
 if [[ ! -x "$(command -v exercism)" ]]; then
-  cd ~
+  cd ~ || exit
   curl -O -J -L https://github.com/exercism/cli/releases/download/v3.0.12/exercism-linux-64bit.tgz
   tar -xvf exercism-linux-64bit.tgz
   mkdir -p ~/bin
@@ -200,7 +206,7 @@ fi
 if [[ ! -x "$(command -v wavm)" ]]; then
   WAVM_DEB_PATH=https://github.com/WAVM/WAVM/releases/download/nightly%2F2019-12-25/wavm-0.0.0-prerelease-linux.deb
   WAVM_DEB_NAME=wavm-0.0.0-prerelease-linux.deb
-  cd ~
+  cd ~ || exit
   wget $WAVM_DEB_PATH
   mv $WAVM_DEB_NAME wavm-1.0.0-linux.deb
   sudo apt install ./wavm-1.0.0-linux.deb
@@ -217,13 +223,13 @@ sudo apt install qemu --yes
 ############################
 
 if [[ ! -x "$(command -v emsdk)" ]]; then
-  cd ~
+  cd ~ || exit
   git clone https://github.com/emscripten-core/emsdk
   # Update and activate latest
-  cd ~/emsdk
+  cd ~/emsdk || exit
   ./emsdk install latest
   ./emsdk activate latest
-  cd ~
+  cd ~ || exit
 fi
 
 ###########################

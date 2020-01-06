@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Desktop Apps
 sudo snap install code --classic
 sudo snap install slack --classic
@@ -23,6 +25,7 @@ code --install-extension rust-lang.rust
 code --install-extension serayuzgur.crates
 code --install-extension jpoissonnier.vscode-styled-components
 code --install-extension WakaTime.vscode-wakatime
+code --install-extension timonwong.shellcheck
 
 # Docker CE
 # Based on https://docs.docker.com/install/linux/docker-ce/ubuntu/
