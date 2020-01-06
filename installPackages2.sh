@@ -63,12 +63,13 @@ sudo apt install libc++abi-dev --yes
 
 if [[ -x "$(command -v rustup)" ]]; then
   rustup update
-else 
-  curl https://sh.rustup.rs -sSf | sh
+else
+  # See flags and options with curl https://sh.rustup.rs -sSf | bash -s -- --help
+  curl https://sh.rustup.rs -sSf | bash -s -- -y
+  source $HOME/.cargo/env
+  export PATH="$HOME/.cargo/bin:$PATH"
 fi
 
-source ~/.profile
-source ~/.bashrc
 rustup component add rustfmt
 rustup component add clippy
 
@@ -220,6 +221,15 @@ if [[ ! -x "$(command -v wavm)" ]]; then
   sudo apt install ./wavm-1.0.0-linux.deb
   rm wavm-1.0.0-linux.deb
 fi
+
+###########################
+# Lucet
+###########################
+# cd ~/projects
+# git clone --recurse-submodules git@github.com:bytecodealliance/lucet.git
+# cd lucet
+# source devenv_setenv.sh
+# cd ~
 
 ############################
 # QEMU
