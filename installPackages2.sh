@@ -156,7 +156,15 @@ fi
 # Bash Stuff
 ############################
 npm i -g bats
-sudo apt install shellcheck -y
+
+# The version fo shellcheck on apt seems to be much older than the snap
+# but I'm not yet sure if snaps are working cleanly on WSL2
+if grep -qi Microsoft /proc/version; then
+  echo "WSL Detected"
+  sudo apt install shellcheck -y 
+else 
+  snap install --channel=edge shellcheck
+fi
 
 # Simple HTTP Server. https://www.npmjs.com/package/http-server
 if [[ ! -x "$(command -v http-server)" ]]; then
