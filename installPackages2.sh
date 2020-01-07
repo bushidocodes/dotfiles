@@ -12,7 +12,7 @@
 email=""
 fullname=""
 
-if [[ ! -z "$email"  && ! -z "$fullname" ]]; then
+if [[ -n "$email"  && -n "$fullname" ]]; then
   git config --global user.name "$fullname"
   git config --global user.email "$email"
 fi
@@ -66,7 +66,7 @@ if [[ -x "$(command -v rustup)" ]]; then
 else
   # See flags and options with curl https://sh.rustup.rs -sSf | bash -s -- --help
   curl https://sh.rustup.rs -sSf | bash -s -- -y
-  source $HOME/.cargo/env
+  source "$HOME/.cargo/env"
   export PATH="$HOME/.cargo/bin:$PATH"
 fi
 
@@ -89,7 +89,7 @@ sudo apt install openjdk-11-jdk openjdk-8-jdk maven --yes
 
 if [[ ! -d "$HOME/.jenv" ]]; then
   git clone https://github.com/gcuisinier/jenv.git ~/.jenv
-  source ~/.profile
+  source ~/.bash_profile
   source ~/.bashrc
 fi
 
@@ -110,7 +110,7 @@ if pyenv --version | grep -q 'pyenv 1'; then
 else
   echo "Installing Pyenv"
   curl https://pyenv.run | bash
-  source ~/.profile
+  source ~/.bash_profile
   source ~/.bashrc
   pyenv install 3.7.5
   pyenv global 3.7.5
@@ -143,13 +143,13 @@ export ansible_python_interpreter=/usr/bin/python2
 if [[ -x "$(command -v n)" ]]; then
   echo "n installed and in path"
   n-update -y
-  source ~/.profile
+  source ~/.bash_profile
   source ~/.bashrc
 else
   # We use the -n argument because we have already configured our profile in our .dotfiles repo for n
   curl -L https://git.io/n-install | bash -s -- -n
   sudo chown -R "$USER":"$(id -gn "$USER")" /home/sean/.config
-  source ~/.profile
+  source ~/.bash_profile
   source ~/.bashrc
 fi
 
@@ -158,11 +158,16 @@ fi
 ############################
 npm i -g bats
 
-# The version fo shellcheck on apt seems to be much older than the snap
-# but I'm not yet sure if snaps are working cleanly on WSL2
+# ShellCheck, a static analysis tool for shell scripts
+# https://github.com/koalaman/shellcheck
 if grep -qi Microsoft /proc/version; then
   echo "WSL Detected"
-  sudo apt install shellcheck -y 
+  cd ~ || exit
+  wget https://storage.googleapis.com/shellcheck/shellcheck-stable.linux.x86_64.tar.xz
+  tar -xvf shellcheck-stable.linux.x86_64.tar.xz
+  sudo mv ./shellcheck-stable/shellcheck /usr/bin
+  rm -rf ./shellcheck-stable 
+  rm shellcheck-stable.linux.x86_64.tar.xz
 else 
   snap install --channel=edge shellcheck
 fi
