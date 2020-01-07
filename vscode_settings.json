@@ -13,8 +13,12 @@
   },
   "git.autofetch": true,
   "java.home": "/home/sean/.jenv/versions/11.0",
+  "python.dataScience.sendSelectionToInteractiveWindow": false,
+  "python.jediEnabled": false,
   "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
-  "window.titleBarStyle": "custom",
   "window.zoomLevel": 0,
-  "workbench.iconTheme": "material-icon-theme"
+  "workbench.iconTheme": "material-icon-theme",
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }
