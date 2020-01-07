@@ -9,7 +9,7 @@ main () {
             diff ../vscode_settings.json ~/winhome/AppData/Roaming/Code/User/settings.json
             ;;
         push)
-            cp ../vscode_settings.json ~/winhome/AppData/Roaming/Code/User
+            cp ../vscode_settings.json ~/winhome/AppData/Roaming/Code/User/settings.json
             ;;
         pull)
             cp -f ~/winhome/AppData/Roaming/Code/User/settings.json ../vscode_settings.json
