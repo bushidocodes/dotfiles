@@ -24,4 +24,4 @@ else
   cp ~/.dotfiles/vscode_settings.json ~/winhome/AppData/Roaming/Code/User
 fi
 
-sudo ./install
+sudo ./install.sh
