@@ -14,6 +14,8 @@ main () {
         pull)
             cp -f ~/winhome/AppData/Roaming/Code/User/settings.json ../vscode_settings.json
             ;;
+        *)
+            echo "./sync_vscode.sh <diff|push|pull>"
     esac
 }
 
