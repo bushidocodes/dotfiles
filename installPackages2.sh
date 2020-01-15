@@ -256,6 +256,11 @@ if [[ ! -x "$(command -v emsdk)" ]]; then
 fi
 
 ###########################
+# LaTeX
+###########################
+sudo apt install texlive texlive-latex-extra --yes
+
+###########################
 # Kubernetes
 ###########################
 # if [ ! -x "$(command -v kubectl)" ]; then
