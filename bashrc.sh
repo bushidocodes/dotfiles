@@ -6,9 +6,10 @@
 
 # If not running interactively, don't do anything
 case $- in
-    *i*) ;;
-      *) return;;
+  *i*) ;;
+  *) return ;;
 esac
 
 # Run things common to both login and interative non-login shells
-. ~/.common
+
+source "./common.sh" && init_common
