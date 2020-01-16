@@ -1,12 +1,6 @@
 #!/bin/bash
 
-is_wsl() {
-  grep -qi Microsoft /proc/version
-}
-
-is_native_ubuntu() {
-  grep -qi Ubuntu /proc/version
-}
+source "$HOME/.dotfiles/utils.sh"
 
 configure_history() {
   # don't put duplicate lines or lines starting with space in the history.
@@ -104,7 +98,7 @@ configure_completion() {
 
 configure_mac_style_open_alias() {
   if is_wsl; then
-    alias open=Explorer.exe
+    alias open='Powershell.exe ii'
   elif is_native_ubuntu; then
     alias open=xdg-open
   fi
@@ -121,15 +115,6 @@ configure_aliases() {
   alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
   configure_mac_style_open_alias
-}
-
-init_wsl_convenience_helpers() {
-  if is_wsl; then
-    export WIN_C_PATH="$(wslpath 'C:\')"
-    export WSL_VERSION=$(wsl.exe -l -v | grep -a '[*]' | sed 's/[^0-9]*//g')
-    export WSL_HOST=$(tail -1 /etc/resolv.conf | cut -d' ' -f2)
-    export DISPLAY=$WSL_HOST:0
-  fi
 }
 
 init_private_paths() {
@@ -153,7 +138,7 @@ init_java() {
 # Based on https://github.com/WhitewaterFoundry/pengwin-setup/commit/cea92cd2438e522d1d81accc43e6884e8d762b62
 remove_win_node_from_path() {
   # shellcheck disable=SC1003
-  WIN_C_PATH="$(wslpath 'C:\')"
+  WIN_C_PATH="$(get_win_c_path)"
   WIN_NPM_PATH="$(dirname "$(command -v npm)")"
   if [[ "${WIN_NPM_PATH}" =~ ^${WIN_C_PATH} ]]; then
     export PATH=${PATH/"${WIN_NPM_PATH}"/}
@@ -220,7 +205,6 @@ init_common() {
   configure_look_and_feel
   configure_completion
   configure_aliases
-  init_wsl_convenience_helpers
   init_private_paths
   init_go
   init_java

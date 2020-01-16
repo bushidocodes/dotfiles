@@ -16,7 +16,11 @@
   "python.dataScience.sendSelectionToInteractiveWindow": false,
   "python.jediEnabled": false,
   "shellcheck.enableQuickFix": true,
-  "shellcheck.exclude": [1090],
+  "shellcheck.exclude": [
+    1090,
+    1091
+  ],
+  "shellformat.flag": "-i=2 -ci",
   "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
   "window.zoomLevel": 0,
   "workbench.iconTheme": "material-icon-theme",

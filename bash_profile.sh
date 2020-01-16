@@ -4,4 +4,4 @@
 
 # Run things common to both login and interative non-login shells
 
-source "./common.sh" && init_common
+source "$HOME/.dotfiles/common.sh" && init_common
