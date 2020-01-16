@@ -29,11 +29,24 @@ get_win_host() {
   printf "%s\n" "$(tail -1 /etc/resolv.conf | cut -d' ' -f2)"
 }
 
-get_code_extensions() {
-  original_path="$(pwd)"
-  cd ~/winhome || exit
-  powershell.exe 'code --list-extensions'
-  cd "$original_path" || exit
+list_code_extensions() {
+  if is_wsl; then
+    original_path="$(pwd)"
+    cd ~/winhome || exit
+    powershell.exe 'code --list-extensions'
+    cd "$original_path" || exit
+  else
+    code --list-extensions
+  fi
+}
+
+install_code_extension() {
+  extension=$1
+  if is_wsl; then
+    powershell.exe "code --install $extension"
+  else
+    code --install-extension $extension
+  fi
 }
 
 link_windows_home() {

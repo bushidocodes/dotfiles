@@ -26,6 +26,7 @@ code --install-extension serayuzgur.crates
 code --install-extension jpoissonnier.vscode-styled-components
 code --install-extension WakaTime.vscode-wakatime
 code --install-extension timonwong.shellcheck
+code --install-extension streetsidesoftware.code-spell-checker
 
 # Docker CE
 # Based on https://docs.docker.com/install/linux/docker-ce/ubuntu/

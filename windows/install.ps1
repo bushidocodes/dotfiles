@@ -40,6 +40,7 @@ code --install-extension serayuzgur.crates
 code --install-extension jpoissonnier.vscode-styled-components
 code --install-extension WakaTime.vscode-wakatime
 code --install-extension timonwong.shellcheck
+code --install-extension streetsidesoftware.code-spell-checker
 
 # Configure Optional Windows Features
 Enable-WindowsOptionalFeature -Online -FeatureName VirtualMachinePlatform               # Enable Windows VM Platform          
