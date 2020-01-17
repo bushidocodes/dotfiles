@@ -75,10 +75,9 @@ windows_vscode_settings_path="$HOME/winhome/AppData/Roaming/Code/User/settings.j
 # Assumes Windows User directory linked to ~/winhome
 vscode_list_extensions() {
   if is_wsl; then
-    original_path="$(pwd)"
-    cd ~/winhome || exit
+    pushd ~/winhome || return
     powershell.exe 'code --list-extensions'
-    cd "$original_path" || exit
+    popd || return
   else
     code --list-extensions
   fi
@@ -89,13 +88,12 @@ vscode_install_extension() {
   extension=$1
   if is_wsl; then
     # DOS does not support UNC paths, so I navigate to my Windows user home directory first
-    original_path="$(pwd)"
-    cd "$HOME/winhome" || return
+    pushd ~/winhome || return
     # If, I just call cmd.exe, execution seems to not block as expected, causing only the first
     # extension to install if calling this within a BASH function. Adding a useless echo before
     # calling the DOS interpreter seems to cause things to block properly. No idea why ¯\_(ツ)_/¯
     echo "" | cmd.exe /C "code --install-extension $extension"
-    cd "$original_path" || return
+    popd || return
   else
     code --install-extension "$extension"
   fi
