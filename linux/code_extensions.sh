@@ -13,8 +13,7 @@ pull(){
 }
 
 push(){
-    while IFS= read -r extension
-    do
+    while IFS="" read -r extension; do
         install_code_extension "$extension"
     done < "$file_location"
 }

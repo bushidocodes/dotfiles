@@ -43,9 +43,16 @@ list_code_extensions() {
 install_code_extension() {
   extension=$1
   if is_wsl; then
-    powershell.exe "code --install $extension"
+    # DOS does not support UNC paths, so I navigate to my Windows user home directory first
+    original_path="$(pwd)"
+    cd "$HOME/winhome" || return
+    # If, I just call cmd.exe, execution seems to not block as expected, causing only the first
+    # extension to install if calling this within a BASH function. Adding a useless echo before 
+    # calling the DOS interpreter seems to cause things to block properly. No idea why ¯\_(ツ)_/¯
+    echo "" | cmd.exe /C  "code --install-extension $extension"
+    cd "$original_path" || return
   else
-    code --install-extension $extension
+    code --install-extension "$extension"
   fi
 }
 
