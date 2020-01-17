@@ -19,29 +19,6 @@ choco install firacode
 # Install PowerShell Modules
 Install-Module -Name posh-git
 
-# Install VSCode Extensions
-code --install-extension PKief.material-icon-theme
-code --install-extension ms-vscode-remote.vscode-remote-extensionpack
-code --install-extension stardog-union.stardog-rdf-grammars
-code --install-extension 13xforever.language-x86-64-assembly
-code --install-extension ms-vscode.cpptools
-code --install-extension naumovs.color-highlight
-code --install-extension vscjava.vscode-java-pack
-code --install-extension ms-azuretools.vscode-docker
-code --install-extension MS-vsliveshare.vsliveshare-pack
-code --install-extension esbenp.prettier-vscode
-code --install-extension ms-python.python
-code --install-extension VisualStudioExptTeam.vscodeintellicode
-code --install-extension ms-vscode.PowerShell
-code --install-extension bungcip.better-toml
-code --install-extension CoenraadS.bracket-pair-colorizer-2
-code --install-extension rust-lang.rust
-code --install-extension serayuzgur.crates
-code --install-extension jpoissonnier.vscode-styled-components
-code --install-extension WakaTime.vscode-wakatime
-code --install-extension timonwong.shellcheck
-code --install-extension streetsidesoftware.code-spell-checker
-
 # Configure Optional Windows Features
 Enable-WindowsOptionalFeature -Online -FeatureName VirtualMachinePlatform               # Enable Windows VM Platform          
 Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux    # Enable WSL

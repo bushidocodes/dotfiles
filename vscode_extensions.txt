@@ -3,6 +3,7 @@ bungcip.better-toml
 CoenraadS.bracket-pair-colorizer-2
 eamodio.gitlens
 esbenp.prettier-vscode
+foxundermoon.shell-format
 James-Yu.latex-workshop
 johnpapa.vscode-peacock
 jpoissonnier.vscode-styled-components
