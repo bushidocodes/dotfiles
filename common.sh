@@ -117,10 +117,13 @@ configure_aliases() {
   configure_mac_style_open_alias
 }
 
+# ~/.local/bin is used by Docker
 init_private_paths() {
-  # Automatically add ~/.local/bin to path (used by Docker)
   if [ -d "$HOME/.local/bin" ]; then
-    PATH="$HOME/.local/bin:$PATH"
+    mkdir -p "$HOME/.local/bin"
+    mkdir -p "$HOME/bin"
+    export PATH="$HOME/.local/bin:$PATH"
+    export PATH="$HOME/bin:$PATH"
   fi
 }
 

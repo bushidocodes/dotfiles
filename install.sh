@@ -196,7 +196,7 @@ install_bash_tools() {
       cd ~ || exit
       wget https://storage.googleapis.com/shellcheck/shellcheck-stable.linux.x86_64.tar.xz
       tar -xvf shellcheck-stable.linux.x86_64.tar.xz
-      sudo mv ./shellcheck-stable/shellcheck /usr/bin
+      sudo mv ./shellcheck-stable/shellcheck /usr/local/bin
       rm -rf ./shellcheck-stable
       rm shellcheck-stable.linux.x86_64.tar.xz
     else
@@ -210,8 +210,7 @@ install_exercism() {
     cd ~ || exit
     curl -O -J -L https://github.com/exercism/cli/releases/download/v3.0.12/exercism-linux-64bit.tgz
     tar -xvf exercism-linux-64bit.tgz
-    mkdir -p ~/bin
-    mv exercism ~/bin
+    sudo mv exercism /usr/local/bin
     rm exercism-linux-64bit.tgz
     echo "Be sure to manually configure the Exercism CLI with your Token"
   else
@@ -285,8 +284,8 @@ install_helm_2() {
     cd ~ || exit
     wget https://get.helm.sh/helm-v2.16.1-linux-amd64.tar.gz
     tar -xvf helm-v2.16.1-linux-amd64.tar.gz linux-amd64/tiller linux-amd64/helm
-    sudo mv linux-amd64/tiller /usr/bin
-    sudo mv linux-amd64/helm /usr/bin
+    sudo mv linux-amd64/tiller /usr/local/bin
+    sudo mv linux-amd64/helm /usr/local/bin
     rm -r linux-amd64
     rm helm-v2.16.1-linux-amd64.tar.gz
     helm init --upgrade
@@ -303,7 +302,7 @@ install_openwhisk() {
     cd ~ || exit
     wget https://github.com/apache/openwhisk-cli/releases/download/1.0.0/OpenWhisk_CLI-1.0.0-linux-amd64.tgz
     tar -xvf OpenWhisk_CLI-1.0.0-linux-amd64.tgz wsk
-    sudo mv wsk /usr/bin
+    sudo mv wsk /usr/local/bin
     rm OpenWhisk_CLI-1.0.0-linux-amd64.tgz
   fi
 }
