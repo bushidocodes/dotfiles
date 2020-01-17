@@ -76,6 +76,9 @@ configure_look_and_feel() {
     alias grep='grep --color=auto'
     alias fgrep='fgrep --color=auto'
     alias egrep='egrep --color=auto'
+
+    alias bats='bats *_test.sh'
+    alias batsall='BATS_RUN_SKIPPED=true bats'
   fi
 
   # colored GCC warnings and errors
