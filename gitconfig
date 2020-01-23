@@ -3,3 +3,5 @@
 	name = Sean McBride
 [core]
 	autocrlf = input
+[url "git@github.com:"]
+	insteadOf = https://github.com/
