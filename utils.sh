@@ -75,9 +75,9 @@ windows_vscode_settings_path="$HOME/winhome/AppData/Roaming/Code/User/settings.j
 # Assumes Windows User directory linked to ~/winhome
 vscode_list_extensions() {
   if is_wsl; then
-    pushd ~/winhome || return
+    pushd ~/winhome 1>/dev/null || return
     powershell.exe 'code --list-extensions'
-    popd || return
+    popd 1>/dev/null || return
   else
     code --list-extensions
   fi
