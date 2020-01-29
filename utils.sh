@@ -30,11 +30,13 @@ get_wsl_version() {
 get_win_c_path() {
   is_wsl || return
   if ! is_wsl; then return; fi
+  # shellcheck disable=SC1003
   printf "%s\n" "$(wslpath 'C:\')"
 }
 
 get_win_user() {
   is_wsl || return
+  # shellcheck disable=SC2016
   powershell.exe '$env:UserName' | sed 's/\r//g'
 }
 
