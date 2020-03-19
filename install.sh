@@ -95,7 +95,8 @@ install_misc_packages() {
 install_c_cpp_tools() {
   ${options["verbose"]} && banner "Installing C/C++ Tools"
 
-  sudo apt-get install gcc gdb g++ clang-format make libtinfo5 libopenmpi-dev --yes
+  sudo apt-get install gcc gdb g++ clang-format-9 make libtinfo5 libopenmpi-dev --yes
+  sudo update-alternatives --install /usr/bin/clang-format clang-format /usr/bin/clang-format-9 1
 }
 
 install_llvm() {
