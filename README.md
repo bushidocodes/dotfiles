@@ -60,14 +60,12 @@ As mentioned above, Windows currently cannot be automated as completely as a \*N
    - Sticky Nodes
    - Spotify
    - Slack
-   - Pengwin (Currently replaced by Ubuntu for 20H1 due to WSL2 issues)
+   - Ubuntu 18.04 LTS
    - OneNote
    - To Do
    - Photos
    - Mail and Calendar
 6. Manually Install other Windows Software
-   - [Yori](http://www.malsmith.net/yori/)
-   - [Edge Insider](https://www.microsoftedgeinsider.com/en-us/)
    - [Office 365](https://www.office.com/)
    - [VitalSource Bookshelf](https://bookshelf.vitalsource.com/)
    - [Scansnap Manager for S1100i](http://scansnap.fujitsu.com/global/dl/)
@@ -101,8 +99,8 @@ wsl.exe --terminate <distro_name>
 10. Link SSH from Windows and make sure the config files have the proper metadata configured:
 
 ```sh
-ln -s /c/Users/Sean ~/winhome
-ln -s /c/Users/Sean/.ssh ~/.ssh
+ln -s /c/Users/sean ~/winhome
+ln -s /c/Users/sean/.ssh ~/.ssh
 sudo chmod 644 ~/.ssh/config
 chmod 400 ~/.ssh/id_rsa
 ```
@@ -118,12 +116,5 @@ chmod 400 ~/.ssh/id_rsa
 git clone git@github.com:bushidocodes/dotfiles.git
 mv dotfiles .dotfiles
 cd ~/.dotfiles/
-./installPackages1.sh
-```
-
-3. Customize Shell, Install dev tools
-
-```sh
-cd ~/.dotfiles/
-./installPackages2.sh
+./install.sh
 ```
