@@ -66,8 +66,8 @@ link_dotfiles() {
 config_git() {
   ${options["verbose"]} && banner "Configuring Git"
 
-  email=""
-  fullname=""
+  email="spmcbride1201@gmail.com"
+  fullname="Sean McBride"
 
   if [[ -n "$email" && -n "$fullname" ]]; then
     git config --global user.name "$fullname"
@@ -87,15 +87,13 @@ install_misc_packages() {
   sudo apt-get install autoconf --yes
   sudo apt-get install automake --yes
   sudo apt-get install libtool --yes
-  sudo apt-get install make --yes
-  sudo apt-get install g++ --yes
   sudo apt-get install unzip --yes
 }
 
 install_c_cpp_tools() {
   ${options["verbose"]} && banner "Installing C/C++ Tools"
 
-  sudo apt-get install gcc gdb g++ clang-format-9 make libtinfo5 libopenmpi-dev --yes
+  sudo apt-get install gcc gdb g++ clang-format-9 make libtinfo5 libopenmpi-dev libuv1-dev --yes
   sudo update-alternatives --install /usr/bin/clang-format clang-format /usr/bin/clang-format-9 1
 }
 
@@ -411,8 +409,8 @@ main() {
 
   if ((${#@} == 0)); then
     update_modules
-    # link_dotfiles
-    # config_git
+    link_dotfiles
+    config_git
     install_misc_packages
     install_c_cpp_tools
     install_llvm
