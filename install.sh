@@ -396,6 +396,17 @@ install_protobuf() {
   fi
 }
 
+install_awsm() {
+  ${options["verbose"]} && banner "Installing Awsm"
+  
+  mkdir -p ~/projects
+  cd ~/projects
+  git clone git@github.com:phanikishoreg/awsm-Serverless-Framework.git
+  cd awsm-Serverless-Framework
+  ./devenv.sh rma
+  ./devenv.sh setup
+}
+
 cleanup() {
   ${options["verbose"]} && banner "Cleaning Up"
 
