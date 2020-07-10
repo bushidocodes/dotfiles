@@ -100,7 +100,7 @@ install_c_cpp_tools() {
 install_llvm() {
   ${options["verbose"]} && banner "Installing LLVM Tools"
 
-  LLVM_VERSION=9
+  LLVM_VERSION=10
   sudo bash -c "$(wget -O - https://apt.llvm.org/llvm.sh)"
   sudo update-alternatives --install /usr/bin/clang clang /usr/bin/clang-$LLVM_VERSION 100
   sudo update-alternatives --install /usr/bin/llvm-config llvm-config /usr/bin/llvm-config-$LLVM_VERSION 100
