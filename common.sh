@@ -101,7 +101,7 @@ configure_completion() {
 
 configure_mac_style_open_alias() {
   if is_wsl; then
-    alias open='Powershell.exe ii'
+    alias open='Explorer.exe'
   elif is_native_ubuntu; then
     alias open=xdg-open
   fi
@@ -166,6 +166,11 @@ init_node() {
   export PATH="$N_PREFIX/bin:$PATH"
 }
 
+init_deno() {
+  export DENO_INSTALL="/home/sean/.deno"
+  export PATH="$DENO_INSTALL/bin:$PATH"
+}
+
 init_python() {
   export PATH="$HOME/.pyenv/bin:$PATH"
   eval "$(pyenv init -)"
@@ -218,6 +223,7 @@ init_common() {
   init_go
   init_java
   init_node
+  init_deno
   init_python
   init_rust
   # init_emsdk <- Not run automatically because this klobbers Node.js

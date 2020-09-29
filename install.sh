@@ -93,8 +93,8 @@ install_misc_packages() {
 install_c_cpp_tools() {
   ${options["verbose"]} && banner "Installing C/C++ Tools"
 
-  sudo apt-get install gcc gdb g++ clang-format-9 make libtinfo5 libopenmpi-dev libuv1-dev --yes
-  sudo update-alternatives --install /usr/bin/clang-format clang-format /usr/bin/clang-format-9 1
+  sudo apt-get install gcc gdb g++ glibc-doc clang-format-10 make cmake libtinfo5 libopenmpi-dev libuv1-dev libboost-all-dev --yes
+  sudo update-alternatives --install /usr/bin/clang-format clang-format /usr/bin/clang-format-10 1
 }
 
 install_llvm() {
@@ -204,6 +204,17 @@ install_nodejs() {
     sudo chown -R "$USER":"$(id -gn "$USER")" /home/sean/.config
     source ~/.bash_profile
     source ~/.bashrc
+  fi
+}
+
+install_deno() {
+  ${options["verbose"]} && banner "Installing Deno"
+  if [[ -x "$(command -v n)" ]]; then
+    echo "deno installed and in path"
+  else
+    curl -fsSL https://deno.land/x/install/install.sh | sh
+    export DENO_INSTALL="/home/sean/.deno"
+    export PATH="$DENO_INSTALL/bin:$PATH"
   fi
 }
 
@@ -398,7 +409,7 @@ install_protobuf() {
 
 install_awsm() {
   ${options["verbose"]} && banner "Installing Awsm"
-  
+
   mkdir -p ~/projects
   cd ~/projects
   git clone git@github.com:phanikishoreg/awsm-Serverless-Framework.git
@@ -431,6 +442,7 @@ main() {
     install_python
     install_ansible
     install_nodejs
+    install_deno
     install_assorted_npm_tools
     install_bash_tools
     install_exercism
