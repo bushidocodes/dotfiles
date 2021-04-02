@@ -53,14 +53,13 @@ As mentioned above, Windows currently cannot be automated as completely as a \*N
 4. Run `windows/install.ps1` in PowerShell as Admin
 5. Install Windows Store Apps other than a WSL distro (these may autodownload if you sync via a Microsoft account).
    - Your Phone
-   - Xbox (beta)
+   - Xbox
    - X410
-   - Windows Terminal (Preview)
-   - Whatsapp Desktop
+   - Windows Terminal
    - Sticky Nodes
    - Spotify
    - Slack
-   - Ubuntu 18.04 LTS
+   - Ubuntu 20.04 LTS
    - OneNote
    - To Do
    - Photos
