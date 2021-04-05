@@ -41,6 +41,7 @@ Obviously, there are rough spots in Windows. Here my annoyances:
 - Things are unfamiliar for \*NIX hackers. Config stuff is likely not just a text file away. Editing the Windows Registry feels like playing Jenga. The command-line traditionally feels like a second class citizen because I can't `Install-App -Name Xbox` and `Install-App -Name Gears5`. This is improving due to [winget](https://github.com/microsoft/winget-cli), but for whatever reason, silent installation flags seem to be poorly documented and fail regularly.
 - Windows apps seem to require being run as Admin more than one would expect, making the lack of `sudo` quite painful. It sucks to have to relaunch a terminal emulator program as an Administrator, particularly since the new Microsoft Terminal app does not support per-tab user permissions.
 - Many many systems restart!
+- I have some trepidation about snaps dependency on systemd and how this will play out on WSL, which does not use systemd.
 
 ## Windows Setup
 

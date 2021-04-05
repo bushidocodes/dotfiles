@@ -69,6 +69,7 @@ link_wsl_conf() {
 }
 
 # VSCode stuff
+# This logic has effectively been replaced by VSCode Settings Sync
 
 extensions_file="$HOME/.dotfiles/vscode_extensions.txt"
 settings_file="$HOME/.dotfiles/vscode_settings.json"
