@@ -1,0 +1,19 @@
+# top-most EditorConfig file
+root = true
+
+[*]
+end_of_line = lf
+insert_final_newline = true
+
+[*.sh]
+switch_case_indent = true
+binary_next_line = true
+shell_variant = bash
+indent_style = tab
+indent_size = 4
+keep_padding = true
+space_redirects    = true
+
+[*.json]
+indent_style = tab
+indent_size = 4
