@@ -1,37 +1,27 @@
 # Must be run from PowerShell run as Administrator
 
-# Install Choco
-# Set-ExecutionPolicy Bypass -Scope Process -Force; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
-
-# And Install Choco Packages
-# choco install 7zip
-# choco install vlc
-# choco install git
-# choco install foxitreader
-# choco install zoom
-# choco install steam
-# choco install vscode
-# choco install docker-desktop
+# TODO: Install firacode font
 # choco install firacode
+# winget does not yet support font installation. See https://github.com/tonsky/FiraCode/wiki/Installing
 
 winget install 7zip.7zip
-winget install VideoLAN.VLC
-winget install Git.Git
-winget install Foxit.FoxitReader
-winget install Zoom.Zoom
-winget install Valve.Steam
-winget install Microsoft.VisualStudioCode.User-x64
-winget install SlackTechnologies.Slack
-winget install Discord.Discord
-winget install Spotify.Spotify
-winget install Microsoft.WindowsTerminal
-winget install Blizzard.BattleNet
-winget install PrivateInternetAccess.PrivateInternetAccess
-winget install Microsoft.Teams
-winget install GOG.Galaxy
 winget install Apple.iTunes
-winget install OBSProject.OBSStudio
+winget install Blizzard.BattleNet
+winget install Discord.Discord
+winget install Foxit.FoxitReader
+winget install Git.Git
+winget install GOG.Galaxy
 winget install LogMeIn.LastPass
+winget install Microsoft.Teams
+winget install Microsoft.VisualStudioCode.User-x64
+winget install Microsoft.WindowsTerminal
+winget install OBSProject.OBSStudio
+winget install PrivateInternetAccess.PrivateInternetAccess
+winget install SlackTechnologies.Slack
+winget install Spotify.Spotify
+winget install Valve.Steam
+winget install VideoLAN.VLC
+winget install Zoom.Zoom
 
 # Install PowerShell Modules
 Install-Module -Name posh-git
