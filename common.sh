@@ -209,6 +209,11 @@ init_wasi_sdk() {
 	export WASI_SDK_PATH="/opt/wasi-sdk/"
 }
 
+# Adds /snap/bin to PATH is snap is in PATH
+init_snaps() {
+	type -p snap && export PATH="/snap/bin:$PATH"
+}
+
 # Lucet
 # To get access to lucetc, you need to run the following
 init_lucet() {
@@ -226,16 +231,17 @@ init_common() {
 	configure_completion
 	configure_aliases
 	init_private_paths
+	init_deno
+	# init_ansible
+	# init_emsdk <- Not run automatically because this klobbers Node.js
 	init_go
 	init_java
+	# init_lucet
 	init_node
-	init_deno
 	# init_python
 	init_rust
-	# init_emsdk <- Not run automatically because this klobbers Node.js
+	init_snaps
+	init_wasi_sdk
 	# init_wasmer
 	init_wasmtime
-	init_wasi_sdk
-	# init_lucet
-	# init_ansible
 }
