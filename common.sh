@@ -211,7 +211,7 @@ init_wasi_sdk() {
 
 # Adds /snap/bin to PATH is snap is in PATH
 init_snaps() {
-	type -p snap && export PATH="/snap/bin:$PATH"
+	type -p snap >/dev/null && export PATH="/snap/bin:$PATH"
 }
 
 # Lucet
