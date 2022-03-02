@@ -87,12 +87,10 @@ install_c_cpp_tools() {
 		gdb \
 		g++ \
 		glibc-doc \
-		clang-format-10 \
 		make \
 		cmake \
 		libtinfo5 \
 		libboost-all-dev --yes
-	sudo update-alternatives --install /usr/bin/clang-format clang-format /usr/bin/clang-format-10 1
 }
 
 install_llvm() {
@@ -113,7 +111,7 @@ install_rust() {
 		rustup update
 	else
 		# See flags and options with curl https://sh.rustup.rs -sSf | bash -s -- --help
-		curl https://sh.rustup.rs -sSf | bash -s -- -y
+		make ~/.cargo/bin/rustup
 		source "$HOME/.cargo/env"
 		export PATH="$HOME/.cargo/bin:$PATH"
 	fi
@@ -137,12 +135,7 @@ install_java() {
 	${options["verbose"]} && banner "Installing Java"
 
 	sudo apt-get install openjdk-17-jdk maven --yes
-
-	if [[ ! -d "$HOME/.jenv" ]]; then
-		git clone https://github.com/gcuisinier/jenv.git ~/.jenv
-		source ~/.bash_profile
-		source ~/.bashrc
-	fi
+	make ~/.jenv
 
 	jenv add /usr/lib/jvm/java-17-openjdk-amd64
 	jenv global 17.0
@@ -177,38 +170,28 @@ install_python() {
 install_nodejs() {
 	${options["verbose"]} && banner "Installing Node.js"
 
-	curl -fsSL https://get.pnpm.io/install.sh | sh -
-	pnpm env use --global lts
+	make ~/.local/share/pnpm/node
 }
 
 install_deno() {
 	${options["verbose"]} && banner "Installing Deno"
-	if [[ -x "$(command -v n)" ]]; then
-		echo "deno installed and in path"
-	else
-		curl -fsSL https://deno.land/x/install/install.sh | sh
-		export DENO_INSTALL="/home/sean/.deno"
-		export PATH="$DENO_INSTALL/bin:$PATH"
-	fi
+
+	make ~/.deno/bin/deno
+	export DENO_INSTALL="/home/sean/.deno"
+	export PATH="$DENO_INSTALL/bin:$PATH"
 }
 
 install_assorted_npm_tools() {
 	${options["verbose"]} && banner "Installing NPM Tools"
 
 	# Simple HTTP Server. https://www.npmjs.com/package/http-server
-	if [[ ! -x "$(command -v http-server)" ]]; then
-		pnpm i -g http-server
-	fi
+	make ~/.local/share/pnpm/http-server
 
 	# Netlify CLI. https://github.com/netlify/cli
-	if [[ ! -x "$(command -v netlify)" ]]; then
-		pnpm i -g netlify-cli
-	fi
+	make ~/.local/share/pnpm/netlify
 
 	# Fancy Kill. Nicer UX for killing processes
-	if [[ ! -x "$(command -v fkill)" ]]; then
-		pnpm i -g fkill-cli
-	fi
+	make ~/.local/share/pnpm/fkill
 
 }
 
@@ -216,54 +199,22 @@ install_bash_tools() {
 	${options["verbose"]} && banner "Installing Bash Tools"
 
 	# BATS, A Bash Unit Testing Framework
-	npm i -g bats
-
-	# shfmt, A linting and formatting tool
-	if [[ -x "$(command -v shfmt)" ]] && [[ $(shfmt --version) == "v3.2.4" ]]; then
-		echo "shfmt 3.2.4 installed and in path"
-	else
-		cd ~ || exit
-		wget https://github.com/mvdan/sh/releases/download/v3.2.4/shfmt_v3.2.4_linux_amd64
-		chmod +x shfmt_v3.2.4_linux_amd64
-		rm -f "$(which shfmt)"
-		sudo mv shfmt_v3.2.4_linux_amd64 /usr/local/bin/shfmt
-		rm shfmt_v3.2.4_linux_amd64
-	fi
-
-	# ShellCheck, a static analysis tool for shell scripts
-	# https://github.com/koalaman/shellcheck
-	if [[ -x "$(command -v shellcheck)" ]]; then
-		echo "Shellcheck installed and in path"
-	else
-		wget https://github.com/koalaman/shellcheck/releases/download/v0.7.1/shellcheck-v0.7.1.linux.x86_64.tar.xz
-		tar -xvf shellcheck-v0.7.1.linux.x86_64.tar.xz
-		sudo mv ./shellcheck-v0.7.1/shellcheck /usr/local/bin
-		rm -rf ./shellcheck-v0.7.1/
-		rm shellcheck-v0.7.1.linux.x86_64.tar.xz
-	fi
+	make ~/.local/bin/bats
+	make ~/.local/bin/shfmt
+	make ~/.local/bin/shellcheck
 }
 
 install_exercism() {
 	${options["verbose"]} && banner "Installing Exercism"
-
-	if [[ ! -x "$(command -v exercism)" ]]; then
-		cd ~ || exit
-		curl -O -J -L https://github.com/exercism/cli/releases/download/v3.0.12/exercism-linux-64bit.tgz
-		tar -xvf exercism-linux-64bit.tgz
-		sudo mv exercism /usr/local/bin
-		rm exercism-linux-64bit.tgz
-		echo "Be sure to manually configure the Exercism CLI with your Token"
-	else
-		exercism upgrade
-	fi
+	cd ~ || exit
+	make ~/.local/bin/exercism
+	exercism upgrade
+	make ~/.local/bin/configlet
 }
 
 install_wasmtime() {
 	${options["verbose"]} && banner "Installing Wasmtime"
-
-	if [[ ! -x "$(command -v wasmtime)" ]]; then
-		curl https://wasmtime.dev/install.sh -sSf | bash
-	fi
+	make ~/.wasmtime/bin/wasmtime
 }
 
 
