@@ -7,7 +7,6 @@
     ~/.bash_logout: bash_logout.sh
     ~/.gitconfig: gitconfig
     ~/.gdbinit: gdbinit
-    ~/.config/Code/User/settings.json: vscode_settings.json
     ~/.cargo/config: cargoConfig
 
 - shell:

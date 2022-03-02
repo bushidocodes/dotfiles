@@ -42,24 +42,13 @@ link_dotfiles() {
 	rm -f ~/.profile ~/.bashrc ~/.bash_logout ~/.gitconfig ~/.zshrc ~/.zsh_plugins.txt ~/.zprofile
 	[ ! -d "$HOME/.cargo" ] && mkdir ~/.cargo
 
-	# mkdir -p ~/bin
-	# if is_wsl; then
-	# 	# We assume PowerShell installed Code by this point, so just set the settings file...
-	# 	export CODE_PATH="$HOME/winhome/AppData/Roaming/Code/User"
-	# 	cp ~/.dotfiles/vscode_settings.json ~/winhome/AppData/Roaming/Code/User
-	# elif is_native_ubuntu; then
-	# 	mkdir -p ~/.config/
-	# 	mkdir -p ~/.config/Code/
-	# 	mkdir -p ~/.config/Code/User/
-	# fi
-
 	BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 	DOTBOT_DIR="dotbot"
 	DOTBOT_BIN="bin/dotbot"
 	CONFIG="install.conf.yaml"
 	cd "${BASEDIR}" || exit 1
-	sudo git -C "${DOTBOT_DIR}" submodule sync --quiet --recursive
-	sudo git submodule update --init --recursive "${DOTBOT_DIR}"
+	git -C "${DOTBOT_DIR}" submodule sync --quiet --recursive
+	git submodule update --init --recursive "${DOTBOT_DIR}"
 	"${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${CONFIG}" #"${@}"
 }
 
@@ -93,14 +82,24 @@ install_misc_packages() {
 install_c_cpp_tools() {
 	${options["verbose"]} && banner "Installing C/C++ Tools"
 
-	sudo apt-get install gcc gdb g++ glibc-doc clang-format-10 make cmake libtinfo5 libopenmpi-dev libuv1-dev libboost-all-dev --yes
+	sudo apt-get install \
+		gcc \
+		gdb \
+		g++ \
+		glibc-doc \
+		clang-format-10 \
+		make \
+		cmake \
+		libtinfo5 \
+		libboost-all-dev --yes
 	sudo update-alternatives --install /usr/bin/clang-format clang-format /usr/bin/clang-format-10 1
 }
 
 install_llvm() {
 	${options["verbose"]} && banner "Installing LLVM Tools"
 
-	LLVM_VERSION=10
+	LLVM_VERSION=13
+	studo apt-get install clang-format-$LLVM_VERSION
 	sudo bash -c "$(wget -O - https://apt.llvm.org/llvm.sh)"
 	sudo update-alternatives --install /usr/bin/clang clang /usr/bin/clang-$LLVM_VERSION 100
 	sudo update-alternatives --install /usr/bin/llvm-config llvm-config /usr/bin/llvm-config-$LLVM_VERSION 100
@@ -137,7 +136,7 @@ install_go() {
 install_java() {
 	${options["verbose"]} && banner "Installing Java"
 
-	sudo apt-get install openjdk-11-jdk openjdk-8-jdk maven --yes
+	sudo apt-get install openjdk-17-jdk maven --yes
 
 	if [[ ! -d "$HOME/.jenv" ]]; then
 		git clone https://github.com/gcuisinier/jenv.git ~/.jenv
@@ -145,9 +144,8 @@ install_java() {
 		source ~/.bashrc
 	fi
 
-	jenv add /usr/lib/jvm/java-8-openjdk-amd64
-	jenv add /usr/lib/jvm/java-11-openjdk-amd64
-	jenv global 11.0
+	jenv add /usr/lib/jvm/java-17-openjdk-amd64
+	jenv global 17.0
 }
 
 install_python() {
@@ -176,35 +174,11 @@ install_python() {
 	fi
 }
 
-install_ansible() {
-	${options["verbose"]} && banner "Installing Ansible"
-
-	if [[ -x "$(command -v ansible)" ]]; then
-		echo "Ansible installed and in path"
-	else
-		sudo apt-add-repository ppa:ansible/ansible
-		sudo apt-get update
-		sudo apt-get install ansible --yes
-	fi
-
-	export ansible_python_interpreter=/usr/bin/python2
-}
-
 install_nodejs() {
 	${options["verbose"]} && banner "Installing Node.js"
 
-	if [[ -x "$(command -v n)" ]]; then
-		echo "n installed and in path"
-		n-update -y
-		source ~/.bash_profile
-		source ~/.bashrc
-	else
-		# We use the -n argument because we have already configured our profile in our .dotfiles repo for n
-		curl -L https://git.io/n-install | bash -s -- -n
-		sudo chown -R "$USER":"$(id -gn "$USER")" /home/sean/.config
-		source ~/.bash_profile
-		source ~/.bashrc
-	fi
+	curl -fsSL https://get.pnpm.io/install.sh | sh -
+	pnpm env use --global lts
 }
 
 install_deno() {
@@ -223,17 +197,17 @@ install_assorted_npm_tools() {
 
 	# Simple HTTP Server. https://www.npmjs.com/package/http-server
 	if [[ ! -x "$(command -v http-server)" ]]; then
-		npm i -g http-server
+		pnpm i -g http-server
 	fi
 
 	# Netlify CLI. https://github.com/netlify/cli
 	if [[ ! -x "$(command -v netlify)" ]]; then
-		npm i -g netlify-cli
+		pnpm i -g netlify-cli
 	fi
 
 	# Fancy Kill. Nicer UX for killing processes
 	if [[ ! -x "$(command -v fkill)" ]]; then
-		npm i -g fkill-cli
+		pnpm i -g fkill-cli
 	fi
 
 }
@@ -284,14 +258,6 @@ install_exercism() {
 	fi
 }
 
-install_wasmer() {
-	${options["verbose"]} && banner "Installing Wasmer"
-
-	if [[ ! -x "$(command -v wasmer)" ]]; then
-		curl https://get.wasmer.io -sSfL | bash
-	fi
-}
-
 install_wasmtime() {
 	${options["verbose"]} && banner "Installing Wasmtime"
 
@@ -300,124 +266,12 @@ install_wasmtime() {
 	fi
 }
 
-install_wavm() {
-	${options["verbose"]} && banner "Installing Wavm"
-
-	if [[ ! -x "$(command -v wavm)" ]]; then
-		WAVM_DEB_PATH=https://github.com/WAVM/WAVM/releases/download/nightly%2F2019-12-25/wavm-0.0.0-prerelease-linux.deb
-		WAVM_DEB_NAME=wavm-0.0.0-prerelease-linux.deb
-		cd ~ || exit
-		wget $WAVM_DEB_PATH
-		mv $WAVM_DEB_NAME wavm-1.0.0-linux.deb
-		sudo apt-get install ./wavm-1.0.0-linux.deb
-		rm wavm-1.0.0-linux.deb
-	fi
-}
-
-install_lucet() {
-	${options["verbose"]} && banner "Installing Lucet"
-
-	cd ~/projects || exit
-	git clone --recurse-submodules git@github.com:bytecodealliance/lucet.git
-	cd lucet || exit
-	source devenv_setenv.sh
-	cd ~ || exit
-}
-
-install_emscripten() {
-	${options["verbose"]} && banner "Installing Emscripten"
-
-	if [[ ! -x "$(command -v emsdk)" ]]; then
-		cd ~ || exit
-		git clone https://github.com/emscripten-core/emsdk
-		# Update and activate latest
-		cd ~/emsdk || exit
-		./emsdk install latest
-		./emsdk activate latest
-		cd ~ || exit
-	fi
-}
 
 install_latex() {
 	${options["verbose"]} && banner "Installing LaTeX"
 
 	sudo apt-get install texlive texlive-latex-extra --yes
 	sudo apt-get install gnuplot --yes
-}
-
-install_kubernetes() {
-	${options["verbose"]} && banner "Installing Kubernetes"
-
-	if [ ! -x "$(command -v kubectl)" ]; then
-		echo "Installing Kubectl"
-		sudo apt-get update && sudo apt-get install -y apt-transport-https
-		curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
-		echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
-		sudo apt-get update
-		sudo apt-get install -y kubectl
-	fi
-}
-
-install_helm_2() {
-	${options["verbose"]} && banner "Installing Helm 2"
-
-	if [ ! -x "$(command -v helm)" ]; then
-		echo "Installing Helm"
-		cd ~ || exit
-		wget https://get.helm.sh/helm-v2.16.1-linux-amd64.tar.gz
-		tar -xvf helm-v2.16.1-linux-amd64.tar.gz linux-amd64/tiller linux-amd64/helm
-		sudo mv linux-amd64/tiller /usr/local/bin
-		sudo mv linux-amd64/helm /usr/local/bin
-		rm -r linux-amd64
-		rm helm-v2.16.1-linux-amd64.tar.gz
-		helm init --upgrade
-	fi
-}
-
-install_helm_3() {
-	${options["verbose"]} && banner "Installing Helm 3"
-
-	curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
-}
-
-install_openwhisk() {
-	${options["verbose"]} && banner "Installing OpenWhisk"
-
-	if [ ! -x "$(command -v wsk)" ]; then
-		echo "Installing OpenWhisk"
-		cd ~ || exit
-		wget https://github.com/apache/openwhisk-cli/releases/download/1.0.0/OpenWhisk_CLI-1.0.0-linux-amd64.tgz
-		tar -xvf OpenWhisk_CLI-1.0.0-linux-amd64.tgz wsk
-		sudo mv wsk /usr/local/bin
-		rm OpenWhisk_CLI-1.0.0-linux-amd64.tgz
-	fi
-}
-
-install_protobuf() {
-	${options["verbose"]} && banner "Installing Protobuf"
-
-	if [ ! -x "$(command -v protoc)" ]; then
-		cd ~ || exit
-		curl -O -J -L https://github.com/protocolbuffers/protobuf/releases/download/v3.10.0/protobuf-all-3.10.0.tar.gz
-		tar -xvf protobuf-all-3.10.0.tar.gz
-		cd protobuf-3.10.0 || exit
-		./configure
-		make
-		make check
-		sudo make install
-		sudo ldconfig # refresh shared library cache
-	fi
-}
-
-install_awsm() {
-	${options["verbose"]} && banner "Installing Awsm"
-
-	mkdir -p ~/projects
-	cd ~/projects
-	git clone git@github.com:phanikishoreg/awsm-Serverless-Framework.git
-	cd awsm-Serverless-Framework
-	./devenv.sh rma
-	./devenv.sh setup
 }
 
 cleanup() {
@@ -439,26 +293,16 @@ main() {
 		install_c_cpp_tools
 		install_llvm
 		install_rust
-		install_go
+		# install_go
 		install_java
-		install_python
-		install_ansible
+		# install_python
 		install_nodejs
 		install_deno
 		install_assorted_npm_tools
 		install_bash_tools
 		install_exercism
-		install_wasmer
 		install_wasmtime
-		install_wavm
-		# install_lucet
-		install_emscripten
 		install_latex
-		# install_kubernetes
-		# install_helm_2
-		# install_helm_3
-		install_openwhisk
-		# install_protobuf
 		cleanup
 	else
 		for cmd in "$@"; do

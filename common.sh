@@ -164,8 +164,8 @@ init_node() {
 	if grep -qi Microsoft /proc/version; then
 		remove_win_node_from_path
 	fi
-	export N_PREFIX="$HOME/n"
-	export PATH="$N_PREFIX/bin:$PATH"
+	export PNPM_HOME="/home/sean/.local/share/pnpm"
+	export PATH="$PNPM_HOME:$PATH"
 }
 
 init_deno() {
@@ -173,31 +173,14 @@ init_deno() {
 	export PATH="$DENO_INSTALL/bin:$PATH"
 }
 
-init_python() {
-	export PATH="$HOME/.pyenv/bin:$PATH"
-	eval "$(pyenv init -)"
-	eval "$(pyenv virtualenv-init -)"
-}
-
 init_rust() {
 	export PATH="$HOME/.cargo/bin:$PATH"
+	. "$HOME/.cargo/env"
 }
 
 ###########################################
 # WebAssembly Tools and Runtimes
 ###########################################
-
-# Emscripten
-# Note: This klobbers my Python and Node.js interpreters, so I only want to do this when needed
-init_emsdk() {
-	source ~/emsdk/emsdk_env.sh > /dev/null
-}
-
-# Wasmer
-init_wasmer() {
-	export WASMER_DIR="/home/sean/.wasmer"
-	[ -s "$WASMER_DIR/wasmer.sh" ] && source "$WASMER_DIR/wasmer.sh"
-}
 
 # Wasmtime
 init_wasmtime() {
@@ -214,17 +197,6 @@ init_snaps() {
 	type -p snap >/dev/null && export PATH="/snap/bin:$PATH"
 }
 
-# Lucet
-# To get access to lucetc, you need to run the following
-init_lucet() {
-	export LUCET_DIR="/home/sean/project/lucet"
-	[ -s "$LUCET_DIR/devenv_setenv.sh" ] && source "$LUCET_DIR/devenv_setenv.sh"
-}
-
-init_ansible() {
-	export ansible_python_interpreter=/usr/bin/python2
-}
-
 init_common() {
 	configure_history
 	configure_look_and_feel
@@ -232,16 +204,11 @@ init_common() {
 	configure_aliases
 	init_private_paths
 	init_deno
-	# init_ansible
-	# init_emsdk <- Not run automatically because this klobbers Node.js
 	init_go
 	init_java
-	# init_lucet
 	init_node
-	# init_python
 	init_rust
 	init_snaps
 	init_wasi_sdk
-	# init_wasmer
 	init_wasmtime
 }
