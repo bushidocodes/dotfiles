@@ -97,7 +97,7 @@ install_llvm() {
 	${options["verbose"]} && banner "Installing LLVM Tools"
 
 	LLVM_VERSION=13
-	studo apt-get install clang-format-$LLVM_VERSION
+	sudo apt-get install clang-format-$LLVM_VERSION --yes
 	sudo bash -c "$(wget -O - https://apt.llvm.org/llvm.sh)"
 	sudo update-alternatives --install /usr/bin/clang clang /usr/bin/clang-$LLVM_VERSION 100
 	sudo update-alternatives --install /usr/bin/llvm-config llvm-config /usr/bin/llvm-config-$LLVM_VERSION 100
