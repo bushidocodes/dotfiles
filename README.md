@@ -20,7 +20,7 @@ My personal opinion is that the highest velocity way to customize your toolchain
 
 Here is what my toolchain currently looks like:
 
-- Windows 10 as the desktop environment
+- Windows 11 as the desktop environment
 - [winget](https://github.com/microsoft/winget-cli) for native Windows package management
 - [WSL2](https://en.wikipedia.org/wiki/Windows_Subsystem_for_Linux) and Ubuntu 20 LTS as my dev environment
 - [Windows Terminal](https://www.microsoft.com/en-us/p/windows-terminal-preview/9n0dx20hk701)
