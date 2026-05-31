@@ -188,7 +188,7 @@ install_bash_tools() {
 	${options["verbose"]} && banner "Installing Bash Tools"
 
 	# BATS, A Bash Unit Testing Framework
-	make ~/.local/bin/bats
+	make ~/.local/share/pnpm/bats
 	make ~/.local/bin/shfmt
 	make ~/.local/bin/shellcheck
 }
