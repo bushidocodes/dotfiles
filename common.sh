@@ -127,12 +127,10 @@ configure_aliases() {
 
 # ~/.local/bin is used by Docker
 init_private_paths() {
-	if [ -d "$HOME/.local/bin" ]; then
-		mkdir -p "$HOME/.local/bin"
-		mkdir -p "$HOME/bin"
-		export PATH="$HOME/.local/bin:$PATH"
-		export PATH="$HOME/bin:$PATH"
-	fi
+	mkdir -p "$HOME/.local/bin"
+	mkdir -p "$HOME/bin"
+	export PATH="$HOME/.local/bin:$PATH"
+	export PATH="$HOME/bin:$PATH"
 }
 
 init_go() {
