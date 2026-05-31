@@ -25,7 +25,6 @@
 	chmod +x shfmt_v3.4.3_linux_amd64
 	rm -f "$(which shfmt)"
 	mv shfmt_v3.4.3_linux_amd64 ~/.local/bin/shfmt
-	rm shfmt_v3.4.3_linux_amd64
 
 # Exercism Configlet https://github.com/exercism/configlet
 ~/.local/bin/configlet: ~/.local/bin
