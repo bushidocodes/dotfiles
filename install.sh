@@ -67,12 +67,8 @@ config_git() {
 install_misc_packages() {
 	${options["verbose"]} && banner "Installing Various Dev Tools from Apt"
 
-	sudo apt-get install fonts-firacode --yes # Fira Code for X Window Apps
 	sudo apt-get install vim --yes # VIM
 	sudo apt-get install curl --yes # Curl
-	sudo apt-get install httpie --yes # HTTPie
-	sudo apt-get install apache2-utils --yes # Apache Bench
-	sudo apt-get install qemu --yes # QEMU
 	sudo apt-get install autoconf --yes
 	sudo apt-get install automake --yes
 	sudo apt-get install libtool --yes
