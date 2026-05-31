@@ -217,6 +217,13 @@ install_wasmtime() {
 	make ~/.wasmtime/bin/wasmtime
 }
 
+install_grok() {
+	${options["verbose"]} && banner "Installing Grok Build"
+
+	curl -fsSL -o /tmp/grok.sh https://x.ai/cli/install.sh
+	bash /tmp/grok.sh
+	rm -f /tmp/grok.sh
+}
 
 install_latex() {
 	${options["verbose"]} && banner "Installing LaTeX"
@@ -254,6 +261,7 @@ main() {
 		install_exercism
 		install_wasmtime
 		install_latex
+		# install_grok
 		cleanup
 	else
 		for cmd in "$@"; do
