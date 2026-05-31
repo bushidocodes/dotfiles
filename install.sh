@@ -69,9 +69,6 @@ install_misc_packages() {
 
 	sudo apt-get install vim --yes # VIM
 	sudo apt-get install curl --yes # Curl
-	sudo apt-get install autoconf --yes
-	sudo apt-get install automake --yes
-	sudo apt-get install libtool --yes
 	sudo apt-get install unzip --yes
 }
 
@@ -85,7 +82,6 @@ install_c_cpp_tools() {
 		glibc-doc \
 		make \
 		cmake \
-		libtinfo5 \
 		libboost-all-dev --yes
 }
 
