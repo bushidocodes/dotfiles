@@ -96,9 +96,8 @@ install_c_cpp_tools() {
 install_llvm() {
 	${options["verbose"]} && banner "Installing LLVM Tools"
 
-	local LLVM_VERSION="${1:-21}"
 	wget -O /tmp/llvm.sh https://apt.llvm.org/llvm.sh
-	sudo bash /tmp/llvm.sh "$LLVM_VERSION" all
+	sudo bash /tmp/llvm.sh "${LLVM_VERSION:-21}" all
 	rm -f /tmp/llvm.sh
 }
 
