@@ -192,6 +192,13 @@ init_wasi_sdk() {
 	export WASI_SDK_PATH="/opt/wasi-sdk/"
 }
 
+init_llvm() {
+	export LLVM_VERSION=21
+	export PATH="/usr/lib/llvm-$LLVM_VERSION/bin:$PATH"
+	export CC=clang
+	export CXX=clang++
+}
+
 # Adds /snap/bin to PATH is snap is in PATH
 init_snaps() {
 	type -p snap >/dev/null && export PATH="/snap/bin:$PATH"
@@ -208,6 +215,7 @@ init_common() {
 	init_java
 	init_node
 	init_rust
+	init_llvm
 	init_snaps
 	init_wasi_sdk
 	init_wasmtime
