@@ -144,15 +144,15 @@ install_python() {
 		curl https://pyenv.run | bash
 		source ~/.bash_profile
 		source ~/.bashrc
-		pyenv install 3.7.5
-		pyenv global 3.7.5
+		pyenv install 3.12
+		pyenv global 3.12
 	fi
 
-	if python3 --version | grep -q 'Python 3.7.5'; then
-		echo "Python 3.7.5 is already installed and in path"
+	if python3 --version | grep -q 'Python 3.12'; then
+		echo "Python 3.12 is already installed and in path"
 	else
-		pyenv install 3.7.5
-		pyenv global 3.7.5
+		pyenv install 3.12
+		pyenv global 3.12
 	fi
 }
 
