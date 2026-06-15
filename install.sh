@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source "./utils.sh"
+source "$(dirname "${BASH_SOURCE[0]}")/utils.sh"
 
 declare -A options=(
 	["verbose"]=false
