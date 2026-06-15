@@ -6,32 +6,32 @@
 	mkdir -p ~/.local/bin
 	mkdir -p ~/.config/exercism
 	mkdir -p temp
-	wget https://github.com/exercism/cli/releases/download/v3.0.13/exercism-linux-64bit.tgz
-	tar -xvf exercism-linux-64bit.tgz -C temp
+	wget https://github.com/exercism/cli/releases/download/v3.5.8/exercism-3.5.8-linux-x86_64.tar.gz
+	tar -xvf exercism-3.5.8-linux-x86_64.tar.gz -C temp
 	mv temp/shell/exercism_completion* ~/.config/exercism
 	mv temp/exercism ~/.local/bin/
 	rm -rf temp
-	rm exercism-linux-64bit.tgz*
+	rm exercism-3.5.8-linux-x86_64.tar.gz*
 
 ~/.local/bin/shellcheck: ~/.local/bin
-	wget https://github.com/koalaman/shellcheck/releases/download/v0.8.0/shellcheck-v0.8.0.linux.x86_64.tar.xz
-	tar -xvf shellcheck-v0.8.0.linux.x86_64.tar.xz
-	mv ./shellcheck-v0.8.0/shellcheck ~/.local/bin
-	rm -rf ./shellcheck-v0.8.0/
-	rm shellcheck-v0.8.0.linux.x86_64.tar.xz
+	wget https://github.com/koalaman/shellcheck/releases/download/v0.11.0/shellcheck-v0.11.0.linux.x86_64.tar.xz
+	tar -xvf shellcheck-v0.11.0.linux.x86_64.tar.xz
+	mv ./shellcheck-v0.11.0/shellcheck ~/.local/bin
+	rm -rf ./shellcheck-v0.11.0/
+	rm shellcheck-v0.11.0.linux.x86_64.tar.xz
 
 ~/.local/bin/shfmt: ~/.local/bin
-	wget https://github.com/mvdan/sh/releases/download/v3.4.3/shfmt_v3.4.3_linux_amd64
-	chmod +x shfmt_v3.4.3_linux_amd64
+	wget https://github.com/mvdan/sh/releases/download/v3.13.1/shfmt_v3.13.1_linux_amd64
+	chmod +x shfmt_v3.13.1_linux_amd64
 	rm -f "$(which shfmt)"
-	mv shfmt_v3.4.3_linux_amd64 ~/.local/bin/shfmt
+	mv shfmt_v3.13.1_linux_amd64 ~/.local/bin/shfmt
 
 # Exercism Configlet https://github.com/exercism/configlet
 ~/.local/bin/configlet: ~/.local/bin
-	wget https://github.com/exercism/configlet/releases/download/4.0.0-alpha.37/configlet-linux-64bit.tgz
-	tar -xvf configlet-linux-64bit.tgz
+	wget https://github.com/exercism/configlet/releases/download/4.0.2/configlet_4.0.2_linux_x86-64.tar.gz
+	tar -xvf configlet_4.0.2_linux_x86-64.tar.gz
 	mv configlet ~/.local/bin
-	rm configlet-linux-64bit.tgz
+	rm configlet_4.0.2_linux_x86-64.tar.gz
 
 ~/.local/share/pnpm/pnpm:
 	curl -fsSL https://get.pnpm.io/install.sh | sh -
