@@ -162,7 +162,7 @@ init_node() {
 	if grep -qi Microsoft /proc/version; then
 		remove_win_node_from_path
 	fi
-	export PNPM_HOME="/home/sean/.local/share/pnpm"
+	export PNPM_HOME="$HOME/.local/share/pnpm"
 	export PATH="$PNPM_HOME:$PATH"
 }
 
