@@ -22,7 +22,7 @@ Here is what my toolchain currently looks like:
 
 - Windows 11 as the desktop environment
 - [winget](https://github.com/microsoft/winget-cli) for native Windows package management
-- [WSL2](https://en.wikipedia.org/wiki/Windows_Subsystem_for_Linux) and Ubuntu 20 LTS as my dev environment
+- [WSL2](https://en.wikipedia.org/wiki/Windows_Subsystem_for_Linux) and Ubuntu 24.04 LTS as my dev environment
 - [Windows Terminal](https://www.microsoft.com/en-us/p/windows-terminal-preview/9n0dx20hk701)
 - [VSCode](https://code.visualstudio.com/) as the main code editor, using the [WSL Remote extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl)
 - Tooling for a wide variety of development stacks
@@ -47,7 +47,7 @@ Obviously, there are rough spots in Windows. Here my annoyances:
 
 As mentioned above, Windows currently cannot be automated as completely as a \*NIX system. However, I've done my best to carry over the spirit of dotfiles to Windows. If you're on a new system, you won't have clone this repo, and you may not even have git. I normally manually download the PowerShell scripts in this repo and wait to clone this repo until in WSL.
 
-1. Install Windows 10
+1. Install Windows 11
 2. Trigger Updates.
 3. Configure SSH keys in WINHOME/.ssh
 4. Run `windows/install.ps1` in PowerShell as Admin
@@ -102,10 +102,7 @@ chmod 400 ~/.ssh/id_rsa
 
 ## Linux Stuff
 
-1. Install a System Python Interpreter
-   `sudo apt-get install python-pip`
-
-2. Clone gitfiles and run ./installPackages.sh to link dotfiles
+Clone the repo and run `./install.sh` to install tooling and link dotfiles (Python is managed via pyenv by `install.sh`, so no system Python setup is needed up front):
 
 ```sh
 git clone git@github.com:bushidocodes/dotfiles.git
