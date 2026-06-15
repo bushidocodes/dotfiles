@@ -139,7 +139,7 @@ init_go() {
 
 init_java() {
 	export PATH="$HOME/.jenv/bin:$PATH"
-	eval "$(jenv init -)"
+	command -v jenv > /dev/null 2>&1 && eval "$(jenv init -)"
 }
 
 # WSL adds the Windows path to the WSL Path. Quite possibly, Node is installed in Windows
@@ -173,7 +173,7 @@ init_deno() {
 
 init_rust() {
 	export PATH="$HOME/.cargo/bin:$PATH"
-	. "$HOME/.cargo/env"
+	[ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
 }
 
 ###########################################
