@@ -11,8 +11,7 @@ binary_next_line = true
 shell_variant = bash
 indent_style = tab
 indent_size = 4
-keep_padding = true
-space_redirects    = true
+space_redirects = true
 
 [*.json]
 indent_style = tab

@@ -199,7 +199,7 @@ init_llvm() {
 
 # Adds /snap/bin to PATH is snap is in PATH
 init_snaps() {
-	type -p snap >/dev/null && export PATH="/snap/bin:$PATH"
+	type -p snap > /dev/null && export PATH="/snap/bin:$PATH"
 }
 
 init_common() {

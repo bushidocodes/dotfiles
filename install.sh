@@ -29,8 +29,8 @@ process_flags() {
 update_modules() {
 	${options["verbose"]} && banner "Upgrading Apt Packages"
 
-	sudo apt-get update --yes         # Update Aptitude Repositories
-	sudo apt-get upgrade --yes        # Upgrade Aptitude Packages
+	sudo apt-get update --yes                             # Update Aptitude Repositories
+	sudo apt-get upgrade --yes                            # Upgrade Aptitude Packages
 	sudo apt-get install software-properties-common --yes # Install PPA Dependencies
 }
 
@@ -67,7 +67,7 @@ config_git() {
 install_misc_packages() {
 	${options["verbose"]} && banner "Installing Various Dev Tools from Apt"
 
-	sudo apt-get install vim --yes # VIM
+	sudo apt-get install vim --yes  # VIM
 	sudo apt-get install curl --yes # Curl
 	sudo apt-get install unzip --yes
 }
@@ -137,7 +137,7 @@ install_python() {
 	sudo apt-get install build-essential libsqlite3-dev sqlite3 bzip2 libbz2-dev zlib1g-dev libssl-dev openssl libgdbm-dev libgdbm-compat-dev liblzma-dev libreadline-dev libncursesw5-dev libffi-dev uuid-dev --yes
 
 	# I use pyenv to manage my tools https://github.com/pyenv/pyenv
-	if command -v pyenv >/dev/null 2>&1; then
+	if command -v pyenv > /dev/null 2>&1; then
 		echo "pyenv is already installed and in path"
 	else
 		echo "Installing Pyenv"
