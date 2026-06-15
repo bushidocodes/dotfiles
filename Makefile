@@ -23,7 +23,7 @@
 ~/.local/bin/shfmt: ~/.local/bin
 	wget https://github.com/mvdan/sh/releases/download/v3.13.1/shfmt_v3.13.1_linux_amd64
 	chmod +x shfmt_v3.13.1_linux_amd64
-	rm -f "$(which shfmt)"
+	rm -f "$$(which shfmt)"
 	mv shfmt_v3.13.1_linux_amd64 ~/.local/bin/shfmt
 
 # Exercism Configlet https://github.com/exercism/configlet
@@ -36,7 +36,7 @@
 ~/.local/share/pnpm/pnpm:
 	curl -fsSL https://get.pnpm.io/install.sh | sh -
 
-~/.local/share/pnpm/node: /home/sean/.local/share/pnpm/pnpm
+~/.local/share/pnpm/node: ~/.local/share/pnpm/pnpm
 	pnpm env use --global lts
 
 ~/.local/share/pnpm/http-server: ~/.local/share/pnpm/pnpm
