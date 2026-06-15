@@ -166,7 +166,7 @@ install_deno() {
 	${options["verbose"]} && banner "Installing Deno"
 
 	make ~/.deno/bin/deno
-	export DENO_INSTALL="/home/sean/.deno"
+	export DENO_INSTALL="$HOME/.deno"
 	export PATH="$DENO_INSTALL/bin:$PATH"
 }
 
