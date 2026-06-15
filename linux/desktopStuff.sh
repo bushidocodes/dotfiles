@@ -25,7 +25,7 @@ sudo apt-get update
 sudo apt-get install docker-ce docker-ce-cli containerd.io
 sudo systemctl start docker
 sudo systemctl enable docker
-sudo usermod -aG docker $USER
+sudo usermod -aG docker "$USER"
 
 if docker-compose --version | grep -q 'docker-compose version 1'; then
 	echo "docker-compose is already installed and in path"
