@@ -3,5 +3,8 @@
 	name = Sean McBride
 [core]
 	autocrlf = input
-[url "git@github.com:"]
-	insteadOf = https://github.com/
+# Only rewrite our own repos to SSH, not all of github.com, so that
+# https:// clones of public/third-party repos (go get, cargo, pip, CI)
+# keep working without an SSH key.
+[url "git@github.com:bushidocodes/"]
+	insteadOf = https://github.com/bushidocodes/
