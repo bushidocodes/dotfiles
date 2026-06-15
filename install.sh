@@ -137,8 +137,8 @@ install_python() {
 	sudo apt-get install build-essential libsqlite3-dev sqlite3 bzip2 libbz2-dev zlib1g-dev libssl-dev openssl libgdbm-dev libgdbm-compat-dev liblzma-dev libreadline-dev libncursesw5-dev libffi-dev uuid-dev --yes
 
 	# I use pyenv to manage my tools https://github.com/pyenv/pyenv
-	if pyenv --version | grep -q 'pyenv 1'; then
-		echo "pyenv 1.x is already installed and in path"
+	if command -v pyenv >/dev/null 2>&1; then
+		echo "pyenv is already installed and in path"
 	else
 		echo "Installing Pyenv"
 		curl https://pyenv.run | bash
