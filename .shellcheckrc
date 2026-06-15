@@ -1,0 +1,3 @@
+# ShellCheck can't follow files sourced at runtime (other dotfiles,
+# ~/.cargo/env, system bash-completion). These are expected, not bugs.
+disable=SC1090,SC1091
