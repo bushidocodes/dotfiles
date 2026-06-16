@@ -33,23 +33,29 @@
 	mv configlet ~/.local/bin
 	rm configlet_4.0.2_linux_x86-64.tar.gz
 
-~/.local/share/pnpm/pnpm:
+# pnpm installs its binary under $PNPM_HOME/bin and only puts it on PATH via
+# ~/.bashrc, which these non-interactive recipes never source. Invoke it by
+# absolute path with PNPM_HOME set rather than relying on a bare `pnpm`.
+PNPM_HOME := $(HOME)/.local/share/pnpm
+PNPM := PNPM_HOME=$(PNPM_HOME) PATH="$(PNPM_HOME)/bin:$$PATH" $(PNPM_HOME)/bin/pnpm
+
+$(PNPM_HOME)/bin/pnpm:
 	curl -fsSL https://get.pnpm.io/install.sh | sh -
 
-~/.local/share/pnpm/node: ~/.local/share/pnpm/pnpm
-	pnpm env use --global lts
+~/.local/share/pnpm/node: $(PNPM_HOME)/bin/pnpm
+	$(PNPM) env use --global lts
 
-~/.local/share/pnpm/http-server: ~/.local/share/pnpm/pnpm
-	pnpm i -g http-server
+~/.local/share/pnpm/http-server: $(PNPM_HOME)/bin/pnpm
+	$(PNPM) i -g http-server
 
-~/.local/share/pnpm/netlify: ~/.local/share/pnpm/pnpm
-	pnpm i -g netlify-cli
+~/.local/share/pnpm/netlify: $(PNPM_HOME)/bin/pnpm
+	$(PNPM) i -g netlify-cli
 
-~/.local/share/pnpm/fkill: ~/.local/share/pnpm/pnpm
-	pnpm i -g fkill-cli
+~/.local/share/pnpm/fkill: $(PNPM_HOME)/bin/pnpm
+	$(PNPM) i -g fkill-cli
 
-~/.local/share/pnpm/bats: ~/.local/share/pnpm/pnpm
-	pnpm i -g bats
+~/.local/share/pnpm/bats: $(PNPM_HOME)/bin/pnpm
+	$(PNPM) i -g bats
 
 ~/.wasmtime/bin/wasmtime:
 	curl https://wasmtime.dev/install.sh -sSf | bash
