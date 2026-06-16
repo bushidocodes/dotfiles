@@ -163,7 +163,7 @@ init_node() {
 		remove_win_node_from_path
 	fi
 	export PNPM_HOME="$HOME/.local/share/pnpm"
-	export PATH="$PNPM_HOME:$PATH"
+	export PATH="$PNPM_HOME/bin:$PATH"
 }
 
 init_deno() {
