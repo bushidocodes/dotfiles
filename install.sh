@@ -69,6 +69,7 @@ install_misc_packages() {
 
 	sudo apt-get install vim --yes  # VIM
 	sudo apt-get install curl --yes # Curl
+	sudo apt-get install wget --yes # Wget (required by install_llvm and the Makefile)
 	sudo apt-get install unzip --yes
 }
 
