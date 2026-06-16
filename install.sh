@@ -196,9 +196,8 @@ install_bash_tools() {
 
 install_exercism() {
 	${options["verbose"]} && banner "Installing Exercism"
-	cd ~ || exit
 	make ~/.local/bin/exercism
-	exercism upgrade
+	(cd ~ && exercism upgrade)
 	make ~/.local/bin/configlet
 }
 
