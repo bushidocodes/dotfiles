@@ -15,7 +15,11 @@ banner() {
 }
 
 is_wsl() {
-	grep -qi Microsoft /proc/version
+	# /proc/version reports the (shared) kernel, so a Docker container on a
+	# WSL2 host also matches "microsoft". Also require a WSL-only interop
+	# marker so we don't false-positive in such containers.
+	grep -qi microsoft /proc/version || return 1
+	[ -n "${WSL_DISTRO_NAME:-}" ] || [ -e /run/WSL ] || command -v wslpath > /dev/null 2>&1
 }
 
 is_native_ubuntu() {
