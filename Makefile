@@ -40,7 +40,9 @@ PNPM_HOME := $(HOME)/.local/share/pnpm
 PNPM := PNPM_HOME=$(PNPM_HOME) PATH="$(PNPM_HOME)/bin:$$PATH" $(PNPM_HOME)/bin/pnpm
 
 $(PNPM_HOME)/bin/pnpm:
-	curl -fsSL https://get.pnpm.io/install.sh | sh -
+	# pnpm's installer infers the rc file from $$SHELL and aborts with
+	# ERR_PNPM_UNKNOWN_SHELL when it is unset (non-interactive shells).
+	curl -fsSL https://get.pnpm.io/install.sh | SHELL="$${SHELL:-/bin/bash}" sh -
 
 ~/.local/share/pnpm/node: $(PNPM_HOME)/bin/pnpm
 	$(PNPM) env use --global lts
