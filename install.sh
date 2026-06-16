@@ -127,6 +127,8 @@ install_java() {
 	sudo apt-get install openjdk-17-jdk maven --yes
 	make ~/.jenv
 
+	export PATH="$HOME/.jenv/bin:$PATH"
+	eval "$(jenv init -)"
 	jenv add /usr/lib/jvm/java-17-openjdk-amd64
 	jenv global 17.0
 }
